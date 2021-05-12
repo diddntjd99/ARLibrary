@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import io.socket.client.IO;
@@ -49,11 +50,17 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    JSONObject data = (JSONObject) args[0];
-                                    textView.setText(data.getString("title"));
-
-                                    //Toast.makeText(MainActivity.this, "학번을 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
-                                } catch(Exception e) {
+                                    JSONArray data = (JSONArray) args[0];
+                                    int len = data.length();
+                                    if(len == 0) { //검색 결과가 없을 시
+                                        Toast.makeText(MainActivity.this, "검색 결과 없음", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        for (int i = 0; i < len; i++) {
+                                            //List에 삽입
+                                        }
+                                    }
+                                    textView.setText(data.getJSONObject(0).getString("title"));
+                                } catch (Exception e) {
                                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                                     e.printStackTrace();
                                 }
