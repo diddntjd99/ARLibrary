@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public Button button;
     public TextView textView;
     private Socket socket;
+    public EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +27,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            socket = IO.socket("http://119.192.49.237:32/");
+            socket = IO.socket("http://119.192.49.237/");
+            //http:://14.53.49.163
             socket.connect();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         textView = (TextView) findViewById(R.id.textView);
+        editText = (EditText) findViewById(R.id.editText);
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                socket.emit("book_name", "야수가 간다1");
+                socket.emit("book_name", editText.getText().toString());
 
                 socket.on("return", new Emitter.Listener() {
                     @Override
