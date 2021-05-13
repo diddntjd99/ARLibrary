@@ -7,17 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.HSB.databinding.ActivityMainBinding;
 import com.example.HSB.databinding.ActivityRecyclerviewBinding;
 import com.example.HSB.databinding.ItemBinding;
 
@@ -72,7 +70,12 @@ class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         JSONObject book = books.get(position);
         try {
+            //책 이미지 - 인코딩된 문자열을 디코딩하여 다시 bitmap 형식으로 변환
+            byte[] imgByte = Base64.decode(book.getString("book_image"), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+
             holder.itemBinding.textView.setText(book.getString("title"));
+            holder.itemBinding.image.setImageBitmap(bitmap);
         } catch (JSONException e) {
             e.printStackTrace();
         }
