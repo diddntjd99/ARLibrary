@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,12 +72,17 @@ class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         JSONObject book = books.get(position);
         try {
-            //책 이미지 - 인코딩된 문자열을 디코딩하여 다시 bitmap 형식으로 변환
-            byte[] imgByte = Base64.decode(book.getString("book_image"), Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
-
             holder.itemBinding.textView.setText(book.getString("title"));
-            holder.itemBinding.image.setImageBitmap(bitmap);
+
+            Log.i("ttt", book.getString("encodeBook"));
+
+            //책 이미지 - 인코딩된 문자열을 디코딩하여 다시 bitmap 형식으로 변환
+            byte[] imgByte = Base64.decode(book.getString("encodeBook"), Base64.DEFAULT);
+            //Bitmap img = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+            ByteArrayInputStream byteStream = new ByteArrayInputStream(imgByte);
+            Bitmap img = BitmapFactory.decodeStream(byteStream) ;
+
+            holder.itemBinding.image.setImageBitmap(img);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -101,7 +108,7 @@ public class ListActivity extends AppCompatActivity {
 
         try {
             socket = IO.socket("http://119.192.49.237/");
-            //http:://14.53.49.163
+            //http://14.53.49.163
             socket.connect();
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,18 +131,16 @@ public class ListActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             JSONArray data = (JSONArray) args[0];
-                            int len = data.length();
-                            if (len == 0) { //검색 결과가 없을 시
-                                Toast.makeText(ListActivity.this, "검색 결과 없음", Toast.LENGTH_SHORT).show();
+                            if(data.length() == 0) {
+                                //검색 내용 없음 알림창 생성
                             } else {
-                                for (int i = 0; i < len; i++) {
+                                for (int i = 0; i < data.length(); i++) {
                                     //List에 삽입
                                     books.add(data.getJSONObject(i));
                                     adapter.notifyItemInserted(i);
                                 }
                             }
                         } catch (Exception e) {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                     }
