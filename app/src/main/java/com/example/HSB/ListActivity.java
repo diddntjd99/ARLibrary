@@ -24,7 +24,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,15 +79,8 @@ class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         try {
             holder.itemBinding.textView.setText(book.getString("title"));
 
-            Log.i("ttt", book.getString("encodeBook"));
-
-            //책 이미지 - 인코딩된 문자열을 디코딩하여 다시 bitmap 형식으로 변환
-            byte[] imgByte = Base64.decode(book.getString("encodeBook"), Base64.DEFAULT);
-            //Bitmap img = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
-            ByteArrayInputStream byteStream = new ByteArrayInputStream(imgByte);
-            Bitmap img = BitmapFactory.decodeStream(byteStream) ;
-
-            holder.itemBinding.image.setImageBitmap(img);
+            ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + book.getString("title"), holder.itemBinding.image);
+            task.execute();
         } catch (JSONException e) {
             e.printStackTrace();
         }
