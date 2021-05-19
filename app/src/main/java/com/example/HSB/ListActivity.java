@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -48,9 +49,9 @@ class MyViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) { //리사이클러 뷰 클릭 시
                 int i = getAdapterPosition();
                 if (i != RecyclerView.NO_POSITION) {
-                    Toast.makeText(itemBinding.getRoot().getContext()
-                            , itemBinding.textView.getText().toString()
-                            , Toast.LENGTH_SHORT).show();
+                    Intent it = new Intent(itemBinding.getRoot().getContext(), DetailActivity.class);
+                    it.putExtra("position", i);
+                    itemBinding.getRoot().getContext().startActivity(it);
                 }
             }
         });
@@ -137,6 +138,10 @@ public class ListActivity extends AppCompatActivity {
                                     books.add(data.getJSONObject(i));
                                     adapter.notifyItemInserted(i);
                                 }
+
+                                //books 라는 JSON List 싱글턴 클래스에 넘겨주기
+                                BookList bl = BookList.getBookListObject();
+                                bl.setBooks(books);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
