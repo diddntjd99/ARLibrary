@@ -5,32 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.HSB.databinding.ActivityRecyclerviewBinding;
-import com.example.HSB.databinding.ItemBinding;
+import com.example.HSB.databinding.ActivityBooklistBinding;
+import com.example.HSB.databinding.BooklistitemBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +26,10 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-class MyViewHolder extends RecyclerView.ViewHolder {
-    ItemBinding itemBinding;
+class BookViewHolder extends RecyclerView.ViewHolder {
+    BooklistitemBinding itemBinding;
 
-    public MyViewHolder(ItemBinding binding) {
+    public BookViewHolder(BooklistitemBinding binding) {
         super(binding.getRoot());
         this.itemBinding = binding;
         itemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
@@ -58,24 +46,24 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     }
 }
 
-class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
     private List<JSONObject> books;
 
-    MyAdapter(List<JSONObject> books) {
+    BookAdapter(List<JSONObject> books) {
         this.books = books;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        ItemBinding itemBinding = ItemBinding.inflate(inflater, parent, false);
-        return new MyViewHolder(itemBinding);
+        BooklistitemBinding itemBinding = BooklistitemBinding.inflate(inflater, parent, false);
+        return new BookViewHolder(itemBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         JSONObject book = books.get(position);
         try {
             holder.itemBinding.textView.setText(book.getString("title"));
@@ -95,14 +83,14 @@ class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 public class ListActivity extends AppCompatActivity {
     ArrayList<JSONObject> books = new ArrayList<>();
-    MyAdapter adapter;
+    BookAdapter adapter;
 
     private Socket socket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityRecyclerviewBinding binding = ActivityRecyclerviewBinding.inflate(getLayoutInflater());
+        ActivityBooklistBinding binding = ActivityBooklistBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         try {
@@ -113,7 +101,7 @@ public class ListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        adapter = new MyAdapter(books);
+        adapter = new BookAdapter(books);
         binding.recyclerview.setAdapter(adapter);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setHasFixedSize(true);
