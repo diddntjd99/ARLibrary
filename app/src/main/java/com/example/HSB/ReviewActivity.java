@@ -141,7 +141,7 @@ public class ReviewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 JSONObject object = new JSONObject();
                 try {
-                    object.put("user_id", "123123");
+                    object.put("user_id", "1871292");
                     object.put("title", data.getString("title"));
                     object.put("review", binding.reviewFieldText.getText());
                     object.put("rating", binding.ratingBar.getRating());
