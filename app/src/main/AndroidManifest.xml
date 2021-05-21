@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".ReviewActivity">
         </activity>
+        <activity android:name=".MypageActivity">
+        </activity>
     </application>
 
 </manifest>

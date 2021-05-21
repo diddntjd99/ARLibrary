@@ -39,5 +39,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+
+        binding.mypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mypageit = new Intent(MainActivity.this, MypageActivity.class);
+                mypageit.putExtra("userid", id);
+                mypageit.putExtra("name", name);
+                startActivity(mypageit);
+            }
+        });
     }
 }
