@@ -108,7 +108,6 @@ public class ListActivity extends AppCompatActivity {
 
         Intent secondIntent = getIntent();
         String book_name = secondIntent.getStringExtra("book_name");
-        //String name = secondIntent.getStringExtra("name");
 
         socket.emit("book_name", book_name);
         socket.on("return", new Emitter.Listener() {
@@ -139,5 +138,11 @@ public class ListActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        socket.disconnect();
     }
 }

@@ -66,11 +66,9 @@ class RentalBookAdapter extends RecyclerView.Adapter<RentalBookViewHolder> {
     public void onBindViewHolder(@NonNull RentalBookViewHolder holder, int position) {
         JSONObject book = rentalbooks.get(position);
         try {
-            Log.i("asd", book.getString("title"));
             holder.itemBinding.bookTitle.setText(book.getString("title"));
             holder.itemBinding.rentalDate.setText(book.getString("rental_date"));
             holder.itemBinding.returnDate.setText(book.getString("return_date"));
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -137,7 +135,11 @@ public class MypageActivity extends AppCompatActivity {
                 });
             }
         });
-
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        socket.disconnect();
+    }
 }

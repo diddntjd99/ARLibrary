@@ -13,8 +13,6 @@ import android.widget.Toast;
 import com.example.HSB.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    public Button button;
-    public EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +25,11 @@ public class MainActivity extends AppCompatActivity {
         String name = intent.getStringExtra("name");
         Toast.makeText(this, id+name, Toast.LENGTH_SHORT).show();
 
-        editText = binding.editText;
-        button = binding.button;
-        button.setOnClickListener(new View.OnClickListener() {
+        binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, ListActivity.class);
-                it.putExtra("book_name",editText.getText().toString());
+                it.putExtra("book_name", binding.editText.getText().toString());
                 it.putExtra("userid", id);
                 it.putExtra("name", name);
                 startActivity(it);
