@@ -135,27 +135,6 @@ public class ReviewActivity extends AppCompatActivity {
                 });
             }
         });
-
-        binding.addReviewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JSONObject object = new JSONObject();
-                try {
-                    object.put("user_id", "1871292");
-                    object.put("title", data.getString("title"));
-                    object.put("review", binding.reviewFieldText.getText());
-                    object.put("rating", binding.ratingBar.getRating());
-                    socket.emit("book_review_add", object);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                reviews.add(object);
-                adapter.notifyItemInserted(adapter.getItemCount());
-
-                binding.reviewFieldText.setText("");
-                binding.ratingBar.setRating(0);
-            }
-        });
     }
 
     @Override

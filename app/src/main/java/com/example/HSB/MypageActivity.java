@@ -39,7 +39,6 @@ class RentalBookViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) { //리사이클러 뷰 클릭 시
                 int i = getAdapterPosition();
                 if (i != RecyclerView.NO_POSITION) {
-
                 }
             }
         });
@@ -48,9 +47,11 @@ class RentalBookViewHolder extends RecyclerView.ViewHolder {
 
 class RentalBookAdapter extends RecyclerView.Adapter<RentalBookViewHolder> {
     private List<JSONObject> rentalbooks;
+    private String user_id;
 
-    RentalBookAdapter(List<JSONObject> rentalbooks) {
+    RentalBookAdapter(List<JSONObject> rentalbooks, String user_id) {
         this.rentalbooks = rentalbooks;
+        this.user_id = user_id;
     }
 
     @NonNull
@@ -66,9 +67,23 @@ class RentalBookAdapter extends RecyclerView.Adapter<RentalBookViewHolder> {
     public void onBindViewHolder(@NonNull RentalBookViewHolder holder, int position) {
         JSONObject book = rentalbooks.get(position);
         try {
-            holder.itemBinding.bookTitle.setText(book.getString("title"));
-            holder.itemBinding.rentalDate.setText(book.getString("rental_date"));
+            holder.itemBinding.bookTitle.setText(book.getString("title") + " / ");
+            holder.itemBinding.rentalDate.setText(book.getString("rental_date") + " / ");
             holder.itemBinding.returnDate.setText(book.getString("return_date"));
+
+            holder.itemBinding.addreview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it = new Intent(holder.itemBinding.getRoot().getContext(), AddReviewActivity.class);
+                    try {
+                        it.putExtra("user_id", user_id);
+                        it.putExtra("title", book.getString("title"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    holder.itemBinding.getRoot().getContext().startActivity(it);
+                }
+            });
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -85,6 +100,7 @@ public class MypageActivity extends AppCompatActivity {
     RentalBookAdapter adapter;
 
     private Socket socket;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,18 +115,18 @@ public class MypageActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        adapter = new RentalBookAdapter(rentalbooks);
-        binding.recyclerview.setAdapter(adapter);
-        binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerview.setHasFixedSize(true);
-
         Intent mypageIntent = getIntent();
-        String id = mypageIntent.getStringExtra("userid");
+        String user_id = mypageIntent.getStringExtra("userid");
         String name = mypageIntent.getStringExtra("name");
 
         binding.name.setText(name+"님의 대출 도서 목록");
 
-        socket.emit("user_rental_history", id);
+        adapter = new RentalBookAdapter(rentalbooks, user_id);
+        binding.recyclerview.setAdapter(adapter);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerview.setHasFixedSize(true);
+
+        socket.emit("user_rental_history", user_id);
         socket.on("return", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
