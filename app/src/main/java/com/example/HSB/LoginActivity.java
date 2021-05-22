@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         JSONObject data = (JSONObject) args[0];
                         Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                        it.putExtra("id", String.valueOf(binding.id.getText()));
+                        it.putExtra("user_id", String.valueOf(binding.id.getText()));
                         try {
                             it.putExtra("name", data.getString("name"));
                         } catch (JSONException e) {

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textColor="@color/black"
+        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textColor="@color/black"
+        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +39,18 @@
         android:numStars="5"
         android:rating="0"
         android:stepSize="0.5"
+        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/delreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="리뷰 삭제"
+        android:visibility="invisible" />
 </LinearLayout>

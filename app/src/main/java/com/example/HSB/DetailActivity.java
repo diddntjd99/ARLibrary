@@ -19,7 +19,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent detailIntent = getIntent();
         int position = detailIntent.getIntExtra("position", 0);
-        String user_id = detailIntent.getStringExtra("userid");
+        String user_id = detailIntent.getStringExtra("user_id");
 
         BookList bookList = BookList.getBookListObject();
         JSONObject data = bookList.getBook(position);
@@ -38,7 +38,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(DetailActivity.this, ReviewActivity.class);
                 it.putExtra("position", position);
-                it.putExtra("userid", user_id);
+                it.putExtra("user_id", user_id);
                 startActivity(it);
             }
         });

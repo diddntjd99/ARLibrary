@@ -44,9 +44,13 @@ class RevirewViewHolder extends RecyclerView.ViewHolder {
 
 class ReviewAdapter extends RecyclerView.Adapter<RevirewViewHolder> {
     private List<JSONObject> reviews;
+    private String user_id;
+    private Socket socket;
 
-    ReviewAdapter(List<JSONObject> reviews) {
+    ReviewAdapter(List<JSONObject> reviews, String user_id, Socket socket) {
         this.reviews = reviews;
+        this.user_id = user_id;
+        this.socket = socket;
     }
 
     @NonNull
@@ -62,9 +66,29 @@ class ReviewAdapter extends RecyclerView.Adapter<RevirewViewHolder> {
     public void onBindViewHolder(@NonNull RevirewViewHolder holder, int position) {
         JSONObject review = reviews.get(position);
         try {
-            holder.itemBinding.id.setText(review.getString("user_id") + " / ");
-            holder.itemBinding.review.setText(review.getString("review") + " / ");
+            holder.itemBinding.id.setText(review.getString("user_id"));
+            holder.itemBinding.review.setText(review.getString("review"));
             String rating = review.getString("rating");
+            if (user_id.equals(review.getString("user_id"))) {
+                holder.itemBinding.delreview.setVisibility(View.VISIBLE);
+                holder.itemBinding.delreview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            RemoveIndex ri = new RemoveIndex();
+                            ri.setIndex(position);
+
+                            JSONObject object = new JSONObject();
+                            object.put("user_id", review.getString("user_id"));
+                            object.put("title", review.getString("title"));
+
+                            socket.emit("delete_review", object);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
             holder.itemBinding.ratingBar.setRating(Float.parseFloat(rating));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -91,7 +115,7 @@ public class ReviewActivity extends AppCompatActivity {
 
         Intent reviewIntent = getIntent();
         int position = reviewIntent.getIntExtra("position", 0);
-        String user_id = reviewIntent.getStringExtra("userid");
+        String user_id = reviewIntent.getStringExtra("user_id");
 
         BookList bookList = BookList.getBookListObject();
         JSONObject data = bookList.getBook(position);
@@ -104,7 +128,7 @@ public class ReviewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        adapter = new ReviewAdapter(reviews);
+        adapter = new ReviewAdapter(reviews, user_id, socket);
         binding.recyclerview.setAdapter(adapter);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setHasFixedSize(true);
@@ -141,7 +165,7 @@ public class ReviewActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             JSONArray data = (JSONArray) args[0];
-                            if(data.length() == 0) {
+                            if (data.length() == 0) {
                                 //검색 내용 없음 알림창 생성
                             } else {
                                 for (int i = 0; i < data.length(); i++) {
@@ -165,11 +189,11 @@ public class ReviewActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             String str = (String) args[0];
-                            if(str.equals("NoRent")) {
+                            if (str.equals("NoRent")) {
                                 Toast.makeText(ReviewActivity.this, "책을 대여한 기록이 없습니다.", Toast.LENGTH_SHORT).show();
-                            } else if(str.equals("Exist")) {
+                            } else if (str.equals("Exist")) {
                                 Toast.makeText(ReviewActivity.this, "이미 리뷰를 등록했습니다.", Toast.LENGTH_SHORT).show();
-                            } else if(str.equals("Save")) {
+                            } else if (str.equals("Save")) {
                                 reviews.add(object);
                                 adapter.notifyItemInserted(adapter.getItemCount());
                             }
@@ -180,11 +204,33 @@ public class ReviewActivity extends AppCompatActivity {
                 });
             }
         });
+        socket.on("delete", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        reviews.remove(new RemoveIndex().getIndex());
+                        adapter.notifyItemRemoved(new RemoveIndex().getIndex());
+                    }
+                });
+            }
+        });
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         socket.disconnect();
+    }
+}
+
+class RemoveIndex{
+    private static int index;
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    public int getIndex() {
+        return index;
     }
 }

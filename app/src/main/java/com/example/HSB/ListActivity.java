@@ -39,7 +39,7 @@ class BookViewHolder extends RecyclerView.ViewHolder {
                 if (i != RecyclerView.NO_POSITION) {
                     Intent it = new Intent(itemBinding.getRoot().getContext(), DetailActivity.class);
                     it.putExtra("position", i);
-                    it.putExtra("userid", new GetUserId().getUserId());
+                    it.putExtra("user_id", new GetUserId().getUserId());
                     itemBinding.getRoot().getContext().startActivity(it);
                 }
             }
@@ -104,7 +104,7 @@ public class ListActivity extends AppCompatActivity {
 
         Intent secondIntent = getIntent();
         String book_name = secondIntent.getStringExtra("book_name");
-        String user_id = secondIntent.getStringExtra("userid");
+        String user_id = secondIntent.getStringExtra("user_id");
         GetUserId gui = new GetUserId();
         gui.setUserId(user_id);
 
@@ -152,7 +152,7 @@ public class ListActivity extends AppCompatActivity {
 }
 
 class GetUserId {
-    static private String userId;
+    private static String userId;
     public void setUserId(String userId) {
         this.userId = userId;
     }

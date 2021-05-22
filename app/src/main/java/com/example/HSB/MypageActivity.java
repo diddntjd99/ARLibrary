@@ -65,8 +65,8 @@ class RentalBookAdapter extends RecyclerView.Adapter<RentalBookViewHolder> {
     public void onBindViewHolder(@NonNull RentalBookViewHolder holder, int position) {
         JSONObject book = rentalbooks.get(position);
         try {
-            holder.itemBinding.bookTitle.setText(book.getString("title") + " / ");
-            holder.itemBinding.rentalDate.setText(book.getString("rental_date") + " / ");
+            holder.itemBinding.bookTitle.setText(book.getString("title"));
+            holder.itemBinding.rentalDate.setText(book.getString("rental_date"));
             holder.itemBinding.returnDate.setText(book.getString("return_date"));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -100,7 +100,7 @@ public class MypageActivity extends AppCompatActivity {
         }
 
         Intent mypageIntent = getIntent();
-        String user_id = mypageIntent.getStringExtra("userid");
+        String user_id = mypageIntent.getStringExtra("user_id");
         String name = mypageIntent.getStringExtra("name");
 
         binding.name.setText(name+"님의 대출 도서 목록");
