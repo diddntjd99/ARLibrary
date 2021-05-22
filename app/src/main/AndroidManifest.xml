@@ -31,8 +31,6 @@
         </activity>
         <activity android:name=".MypageActivity">
         </activity>
-        <activity android:name=".AddReviewActivity">
-        </activity>
     </application>
 
 </manifest>

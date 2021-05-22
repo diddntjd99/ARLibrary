@@ -47,11 +47,9 @@ class RentalBookViewHolder extends RecyclerView.ViewHolder {
 
 class RentalBookAdapter extends RecyclerView.Adapter<RentalBookViewHolder> {
     private List<JSONObject> rentalbooks;
-    private String user_id;
 
-    RentalBookAdapter(List<JSONObject> rentalbooks, String user_id) {
+    RentalBookAdapter(List<JSONObject> rentalbooks) {
         this.rentalbooks = rentalbooks;
-        this.user_id = user_id;
     }
 
     @NonNull
@@ -70,20 +68,6 @@ class RentalBookAdapter extends RecyclerView.Adapter<RentalBookViewHolder> {
             holder.itemBinding.bookTitle.setText(book.getString("title") + " / ");
             holder.itemBinding.rentalDate.setText(book.getString("rental_date") + " / ");
             holder.itemBinding.returnDate.setText(book.getString("return_date"));
-
-            holder.itemBinding.addreview.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent it = new Intent(holder.itemBinding.getRoot().getContext(), AddReviewActivity.class);
-                    try {
-                        it.putExtra("user_id", user_id);
-                        it.putExtra("title", book.getString("title"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    holder.itemBinding.getRoot().getContext().startActivity(it);
-                }
-            });
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -121,7 +105,7 @@ public class MypageActivity extends AppCompatActivity {
 
         binding.name.setText(name+"님의 대출 도서 목록");
 
-        adapter = new RentalBookAdapter(rentalbooks, user_id);
+        adapter = new RentalBookAdapter(rentalbooks);
         binding.recyclerview.setAdapter(adapter);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setHasFixedSize(true);

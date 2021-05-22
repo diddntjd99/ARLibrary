@@ -39,6 +39,7 @@ class BookViewHolder extends RecyclerView.ViewHolder {
                 if (i != RecyclerView.NO_POSITION) {
                     Intent it = new Intent(itemBinding.getRoot().getContext(), DetailActivity.class);
                     it.putExtra("position", i);
+                    it.putExtra("userid", new GetUserId().getUserId());
                     itemBinding.getRoot().getContext().startActivity(it);
                 }
             }
@@ -101,13 +102,16 @@ public class ListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Intent secondIntent = getIntent();
+        String book_name = secondIntent.getStringExtra("book_name");
+        String user_id = secondIntent.getStringExtra("userid");
+        GetUserId gui = new GetUserId();
+        gui.setUserId(user_id);
+
         adapter = new BookAdapter(books);
         binding.recyclerview.setAdapter(adapter);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setHasFixedSize(true);
-
-        Intent secondIntent = getIntent();
-        String book_name = secondIntent.getStringExtra("book_name");
 
         socket.emit("book_name", book_name);
         socket.on("return", new Emitter.Listener() {
@@ -144,5 +148,15 @@ public class ListActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         socket.disconnect();
+    }
+}
+
+class GetUserId {
+    static private String userId;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+    public String getUserId(){
+        return userId;
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -88,8 +89,10 @@ public class ReviewActivity extends AppCompatActivity {
         ActivityReviewBinding binding = ActivityReviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent detailIntent = getIntent();
-        int position = detailIntent.getIntExtra("position", 0);
+        Intent reviewIntent = getIntent();
+        int position = reviewIntent.getIntExtra("position", 0);
+        String user_id = reviewIntent.getStringExtra("userid");
+
         BookList bookList = BookList.getBookListObject();
         JSONObject data = bookList.getBook(position);
 
@@ -105,6 +108,25 @@ public class ReviewActivity extends AppCompatActivity {
         binding.recyclerview.setAdapter(adapter);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setHasFixedSize(true);
+
+        JSONObject object = new JSONObject();
+        binding.addReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    object.put("user_id", user_id);
+                    object.put("title", data.getString("title"));
+                    object.put("review", binding.reviewFieldText.getText());
+                    object.put("rating", binding.ratingBar.getRating());
+                    socket.emit("book_review_add", object);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                binding.reviewFieldText.setText("");
+                binding.ratingBar.setRating(0);
+            }
+        });
 
         try {
             socket.emit("book_review", data.getString("title"));
@@ -127,6 +149,29 @@ public class ReviewActivity extends AppCompatActivity {
                                     reviews.add(data.getJSONObject(i));
                                     adapter.notifyItemInserted(i);
                                 }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+        socket.on("reviewSave", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String str = (String) args[0];
+                            if(str.equals("NoRent")) {
+                                Toast.makeText(ReviewActivity.this, "책을 대여한 기록이 없습니다.", Toast.LENGTH_SHORT).show();
+                            } else if(str.equals("Exist")) {
+                                Toast.makeText(ReviewActivity.this, "이미 리뷰를 등록했습니다.", Toast.LENGTH_SHORT).show();
+                            } else if(str.equals("Save")) {
+                                reviews.add(object);
+                                adapter.notifyItemInserted(adapter.getItemCount());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

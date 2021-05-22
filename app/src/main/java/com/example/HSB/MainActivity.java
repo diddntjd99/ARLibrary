@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         String name = intent.getStringExtra("name");
         Toast.makeText(this, id+name, Toast.LENGTH_SHORT).show();
 
-        binding.button.setOnClickListener(new View.OnClickListener() {
+        binding.find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, ListActivity.class);
