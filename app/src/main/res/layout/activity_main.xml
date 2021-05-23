@@ -2,8 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:layout_marginLeft="0"
+    android:background="#234BAC"
+    android:backgroundTint="#00FFFFFF"
+    android:backgroundTintMode="src_over"
     tools:context=".MainActivity">
 
     <Button
@@ -11,31 +15,96 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="검색"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.424" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/find"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_bias="0.595" />
 
     <Button
         android:id="@+id/mypage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="70"
+        android:insetTop="0"
         android:text="마이페이지"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="82dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10"
+        android:paddingVertical="10"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="335dp">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="339dp"
+            android:layout_height="57dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="0"
+            android:layout_marginRight="0"
+            android:layout_weight="0"
+            android:background="@color/white"
+            android:backgroundTint="#FFFFFF"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"
+            android:longClickable="false"
+            android:text="" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="70"
+            android:layout_gravity="center"
+            android:layout_weight="70"
+            android:backgroundTint="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/loupe2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10"
+        android:paddingVertical="10"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="2dp">
+
+        <ImageButton
+            android:id="@+id/menuButton"
+            android:layout_width="60"
+            android:layout_height="60"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/menu_button2" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="290dp"
+            android:layout_height="60"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/font" />
+
+        <ImageButton
+            android:id="@+id/idButton"
+            android:layout_width="60"
+            android:layout_height="60"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/qr_code" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
