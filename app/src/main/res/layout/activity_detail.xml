@@ -17,11 +17,11 @@
         tools:layout_editor_absoluteY="2dp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="413dp"
         android:layout_height="74dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="-1dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <ImageButton
             android:id="@+id/menuButton"
@@ -38,6 +38,7 @@
             android:layout_height="60"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:paddingLeft="10"
             android:paddingRight="64"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/font" />

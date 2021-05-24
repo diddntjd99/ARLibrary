@@ -141,7 +141,7 @@
             android:paddingTop="10"
             android:paddingRight="10"
             android:paddingBottom="10"
-            android:text="리뷰 추가"
+            android:text="리뷰 작성"
             android:textAlignment="center"
             android:textColor="#808080"
             android:textSize="16sp"
