@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="0"
 
-    android:background="#234BAC">
+    android:background="@color/white">
 
     <View
         android:id="@+id/view"
         android:layout_width="408dp"
         android:layout_height="71dp"
+        android:background="#4062B3"
         tools:layout_editor_absoluteX="2dp"
         tools:layout_editor_absoluteY="2dp" />
 
     <LinearLayout
-        android:layout_width="410dp"
+        android:layout_width="wrap_content"
         android:layout_height="74dp"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="2dp"
@@ -44,7 +45,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="411dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
@@ -58,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="책제목"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="28" />
 
         <ImageView
@@ -72,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="소장사항"
-            android:textColor="@color/white"
+            android:textColor="#323232"
             android:textSize="18" />
 
         <LinearLayout
@@ -87,14 +88,17 @@
                 android:layout_width="240dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="대출현황" />
+                android:text="대출현황"
+                android:textColor="#323232" />
 
             <TextView
                 android:id="@+id/aboutBook2"
                 android:layout_width="95dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="예약현황" />
+                android:text="예약현황"
+                android:textColor="#323232" />
+
         </LinearLayout>
 
         <View
@@ -112,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="책소개"
-            android:textColor="@color/white"
+            android:textColor="#323232"
             android:textSize="18" />
 
         <TextView
@@ -136,14 +140,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="저자소개"
-            android:textColor="@color/white"
+            android:textColor="#323232"
             android:textSize="18" />
 
         <TextView
             android:id="@+id/aboutAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#302E2E" />
 
         <View
             android:id="@+id/bar3"
