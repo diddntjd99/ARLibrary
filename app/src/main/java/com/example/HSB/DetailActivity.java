@@ -33,7 +33,7 @@ public class DetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
+        /*binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(DetailActivity.this, ReviewActivity.class);
@@ -41,6 +41,6 @@ public class DetailActivity extends AppCompatActivity {
                 it.putExtra("user_id", user_id);
                 startActivity(it);
             }
-        });
+        });*/
     }
 }

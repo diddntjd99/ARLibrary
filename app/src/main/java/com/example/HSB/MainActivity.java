@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.mypage.setOnClickListener(new View.OnClickListener() {
+        /*binding.mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent mypageit = new Intent(MainActivity.this, MypageActivity.class);
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 mypageit.putExtra("name", name);
                 startActivity(mypageit);
             }
-        });
+        });*/
     }
 
     @Override
