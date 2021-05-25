@@ -6,40 +6,6 @@
     android:layout_height="match_parent"
     android:background="#4062B3">
 
-    <EditText
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#FFFFFF"
-        android:ems="10"
-        android:hint="id"
-        android:inputType="textPersonName"
-        android:textColor="@color/black"
-        android:textColorHighlight="#F9FD7A"
-        android:textColorHint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:backgroundTint="#FFFFFF"
-        android:ems="10"
-        android:foregroundTint="#8F5757"
-        android:hint="password"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/loginbtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
-        app:layout_constraintVertical_bias="0.716" />
-
     <Button
         android:id="@+id/loginbtn"
         android:layout_width="wrap_content"
@@ -60,7 +26,8 @@
         android:layout_marginTop="32dp"
         android:text="Login"
         android:textColor="@color/white"
-        android:textSize="34sp"
+        android:textSize="20"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/loginbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,15 +47,68 @@
         android:textSize="16sp"
         app:cornerRadius="20"
         tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="515dp" />
+        tools:layout_editor_absoluteY="572dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:foregroundTint="#8F5757"
+        android:hint="password"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/loginbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/id"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="id"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHighlight="#F9FD7A"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="19dp"
         android:text="종합정보 시스템의 ID/PW를 입력하세요"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="392dp" />
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="434dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="260"
+        android:layout_height="260"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="80dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:visibility="visible"
+        app:srcCompat="@drawable/logo2"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="77dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
