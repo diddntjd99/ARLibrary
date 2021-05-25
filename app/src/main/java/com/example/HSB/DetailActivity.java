@@ -25,8 +25,8 @@ public class DetailActivity extends AppCompatActivity {
         JSONObject data = bookList.getBook(position);
 
         try {
-            binding.title.setText(data.getString("title"));
-            binding.Number.setText(data.getString("book_location"));
+            binding.name.setText(data.getString("title"));
+            binding.name.setText(data.getString("book_location"));
             ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + data.getString("title"), binding.imageView);
             task.execute();
         } catch (JSONException e) {

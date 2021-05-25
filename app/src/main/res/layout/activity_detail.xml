@@ -75,7 +75,7 @@
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
-                android:id="@+id/소장사항"
+                android:id="@+id/textview9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="소장사항"
@@ -118,7 +118,7 @@
                 android:paddingRight="0dp" />
 
             <TextView
-                android:id="@+id/책소개"
+                android:id="@+id/introduction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="책소개"
