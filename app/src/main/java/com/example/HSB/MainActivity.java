@@ -1,15 +1,19 @@
 package com.example.HSB;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.HSB.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); // 기존 title 지우기
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_button2);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        mDrawerLayout = binding.drawerLayout;
 
         Intent intent = getIntent();
         String user_id = intent.getStringExtra("user_id");
@@ -47,5 +53,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(mypageit);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            mDrawerLayout.closeDrawers();
+        }else{
+            super.onBackPressed();
+        }
     }
 }
