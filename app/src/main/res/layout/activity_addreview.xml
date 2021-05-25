@@ -121,7 +121,8 @@
             android:paddingBottom="5dp"
             android:text="최소 10자 이상 작성해주세요"
             android:textAlignment="textStart"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="RtlCompat" />
 
         <Button
             android:id="@+id/reviewBtn"

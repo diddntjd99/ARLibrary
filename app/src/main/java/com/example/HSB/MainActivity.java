@@ -20,6 +20,7 @@ import com.example.HSB.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     Toolbar myToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String user_id = intent.getStringExtra("user_id");
         String name = intent.getStringExtra("name");
-        Toast.makeText(this, user_id+name, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, user_id + name, Toast.LENGTH_SHORT).show();
 
-        myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_button2);
-        getSupportActionBar().setTitle("");
+//        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+//        setSupportActionBar(myToolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_button2);
+//        getSupportActionBar().setTitle("");
 
         binding.find.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,14 +68,4 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //return super.onOptionsItemSelected(item);
-        if(item.getItemId() == R.id.mymenu){
-            Toast.makeText(getApplicationContext(), "환경설정 버튼 클릭됨", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
 }
