@@ -4,11 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:layout_marginLeft="0"
+    android:layout_marginLeft="0dp"
     android:background="#4062B3"
     android:backgroundTint="#00FFFFFF"
     android:backgroundTintMode="src_over"
     tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <Button
         android:id="@+id/find"
@@ -26,29 +37,31 @@
     <Button
         android:id="@+id/mypage"
         android:layout_width="wrap_content"
-        android:layout_height="70"
+        android:layout_height="70dp"
         android:insetTop="0"
         android:text="마이페이지"
         android:visibility="invisible"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="82dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="60"
+        android:layout_height="60dp"
         android:orientation="horizontal"
-        android:paddingHorizontal="10"
-        android:paddingVertical="10"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="335dp">
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="339dp"
             android:layout_height="57dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="0"
-            android:layout_marginRight="0"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_weight="0"
             android:background="@color/white"
             android:backgroundTint="#FFFFFF"
@@ -61,7 +74,7 @@
         <ImageButton
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
-            android:layout_height="70"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="70"
             android:backgroundTint="#00FFFFFF"
@@ -71,18 +84,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:paddingHorizontal="10"
-        android:paddingVertical="10"
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="2dp">
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/my_toolbar"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/menuButton"
-            android:layout_width="60"
-            android:layout_height="60"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:scaleType="centerInside"
@@ -91,7 +106,7 @@
         <ImageView
             android:id="@+id/logo"
             android:layout_width="290dp"
-            android:layout_height="60"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:scaleType="centerInside"
@@ -99,8 +114,8 @@
 
         <ImageButton
             android:id="@+id/idButton"
-            android:layout_width="60"
-            android:layout_height="60"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:scaleType="centerInside"

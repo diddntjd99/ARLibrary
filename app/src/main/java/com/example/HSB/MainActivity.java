@@ -1,10 +1,15 @@
 package com.example.HSB;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +19,7 @@ import com.example.HSB.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    Toolbar myToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
         String user_id = intent.getStringExtra("user_id");
         String name = intent.getStringExtra("name");
         Toast.makeText(this, user_id+name, Toast.LENGTH_SHORT).show();
+
+        myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_button2);
+        getSupportActionBar().setTitle("");
 
         binding.find.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,5 +57,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(mypageit);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //return super.onOptionsItemSelected(item);
+        if(item.getItemId() == R.id.mymenu){
+            Toast.makeText(getApplicationContext(), "환경설정 버튼 클릭됨", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

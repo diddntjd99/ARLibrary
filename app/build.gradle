@@ -43,4 +43,5 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
 }
