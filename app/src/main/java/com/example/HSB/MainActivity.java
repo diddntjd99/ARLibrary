@@ -17,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false); // 기존 title 지우기
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_button2);
+
         Intent intent = getIntent();
         String user_id = intent.getStringExtra("user_id");
         String name = intent.getStringExtra("name");

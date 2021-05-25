@@ -10,6 +10,25 @@
     android:backgroundTintMode="src_over"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4062B3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="290dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/font" />
+    </androidx.appcompat.widget.Toolbar>
+
     <Button
         android:id="@+id/find"
         android:layout_width="wrap_content"
@@ -27,9 +46,11 @@
         android:id="@+id/mypage"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
+        android:layout_marginTop="200dp"
         android:insetTop="0dp"
         android:text="마이페이지"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/editText"
@@ -70,45 +91,6 @@
             android:scaleType="centerInside"
             app:srcCompat="@drawable/loupe2" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/menuButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/menu_button2" />
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="290dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/font" />
-
-        <ImageButton
-            android:id="@+id/idButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/qr_code" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -134,7 +134,7 @@ public class ReviewActivity extends AppCompatActivity {
         binding.recyclerview.setHasFixedSize(true);
 
         JSONObject object = new JSONObject();
-        binding.addReviewBtn.setOnClickListener(new View.OnClickListener() {
+        /*binding.addReviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -150,7 +150,7 @@ public class ReviewActivity extends AppCompatActivity {
                 binding.reviewFieldText.setText("");
                 binding.ratingBar.setRating(0);
             }
-        });
+        });*/
 
         try {
             socket.emit("book_review", data.getString("title"));
