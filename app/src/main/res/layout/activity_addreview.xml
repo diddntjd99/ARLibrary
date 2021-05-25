@@ -124,7 +124,7 @@
             tools:ignore="RtlCompat" />
 
         <Button
-            android:id="@+id/reviewBtn"
+            android:id="@+id/addreviewBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -141,15 +141,6 @@
             android:textStyle="bold"
             app:cornerRadius="10dp" />
 
-        <Button
-            android:id="@+id/addReviewBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#4062B3"
-            android:backgroundTint="#4062B3"
-            android:text="리뷰 추가"
-            android:visibility="invisible" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
