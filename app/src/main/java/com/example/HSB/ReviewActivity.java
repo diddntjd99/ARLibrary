@@ -105,23 +105,26 @@ class ReviewAdapter extends RecyclerView.Adapter<RevirewViewHolder> {
 }
 
 public class ReviewActivity extends AppCompatActivity {
-    ArrayList<JSONObject> reviews = new ArrayList<>();
-    ReviewAdapter adapter;
+    private ActivityReviewBinding binding;
+
+    private ArrayList<JSONObject> reviews = new ArrayList<>();
+    private ReviewAdapter adapter;
 
     private Socket socket;
-    JSONObject data;
+    private JSONObject data;
+    private String user_id;
 
     private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityReviewBinding binding = ActivityReviewBinding.inflate(getLayoutInflater());
+        binding = ActivityReviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Intent reviewIntent = getIntent();
         int position = reviewIntent.getIntExtra("position", 0);
-        String user_id = reviewIntent.getStringExtra("user_id");
+        user_id = reviewIntent.getStringExtra("user_id");
 
         BookList bookList = BookList.getBookListObject();
         data = bookList.getBook(position);
@@ -141,11 +144,6 @@ public class ReviewActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        adapter = new ReviewAdapter(reviews, user_id, socket);
-        binding.recyclerview.setAdapter(adapter);
-        binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerview.setHasFixedSize(true);
 
         binding.reviewViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,6 +196,12 @@ public class ReviewActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        reviews = new ArrayList<>();
+        adapter = new ReviewAdapter(reviews, user_id, socket);
+        binding.recyclerview.setAdapter(adapter);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerview.setHasFixedSize(true);
 
         try {
             socket.emit("book_review", data.getString("title"));
