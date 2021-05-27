@@ -6,9 +6,9 @@ import java.util.List;
 
 public class StaticData {
     private List<JSONObject> books;
+    private JSONObject book;
     private String user_id;
     private String user_name;
-    private int position;
 
     private static class StaticDataHolder {
         public static final StaticData INSTANCE = new StaticData();
@@ -17,8 +17,8 @@ public class StaticData {
         return StaticDataHolder.INSTANCE;
     }
 
-    public JSONObject getBook(int index) {
-        return books.get(index);
+    public List<JSONObject> getBooks() {
+        return books;
     }
     public void setBooks(List<JSONObject> books) {
         this.books = books;
@@ -38,10 +38,10 @@ public class StaticData {
         this.user_name = user_name;
     }
 
-    public int getPosition() {
-        return position;
+    public JSONObject getBook() {
+        return book;
     }
-    public void setPosition(int position) {
-        this.position = position;
+    public void setBook(JSONObject book) {
+        this.book = book;
     }
 }

@@ -41,8 +41,7 @@ class BookViewHolder extends RecyclerView.ViewHolder {
                 int i = getAdapterPosition();
                 if (i != RecyclerView.NO_POSITION) {
                     Intent it = new Intent(itemBinding.getRoot().getContext(), DetailActivity.class);
-                    StaticData sd = StaticData.getStaticDataObject();
-                    sd.setPosition(i);
+                    StaticData.getStaticDataObject().setBook(StaticData.getStaticDataObject().getBooks().get(i));
                     itemBinding.getRoot().getContext().startActivity(it);
                 }
             }
@@ -141,8 +140,7 @@ public class ListActivity extends AppCompatActivity {
                                 }
 
                                 //books 라는 JSON List 싱글턴 클래스에 넘겨주기
-                                StaticData sb = StaticData.getStaticDataObject();
-                                sb.setBooks(books);
+                                StaticData.getStaticDataObject().setBooks(books);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

@@ -121,10 +121,8 @@ public class ReviewActivity extends AppCompatActivity {
         binding = ActivityReviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        StaticData sd = StaticData.getStaticDataObject();
-        int position = sd.getPosition();
-        user_id = sd.getUser_id();
-        data = sd.getBook(position);
+        user_id = StaticData.getStaticDataObject().getUser_id();
+        data = StaticData.getStaticDataObject().getBook();
 
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); // 기존 title 지우기
