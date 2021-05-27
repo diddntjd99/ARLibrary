@@ -179,5 +179,4 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/navi_menu"
         android:background="#4062B3"/>
-
 </androidx.drawerlayout.widget.DrawerLayout>

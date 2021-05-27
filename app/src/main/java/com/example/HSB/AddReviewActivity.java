@@ -30,12 +30,10 @@ public class AddReviewActivity extends AppCompatActivity {
         ActivityAddreviewBinding binding = ActivityAddreviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent addReviewIntent = getIntent();
-        int position = addReviewIntent.getIntExtra("position", 0);
-        String user_id = addReviewIntent.getStringExtra("user_id");
-
-        BookList bookList = BookList.getBookListObject();
-        JSONObject data = bookList.getBook(position);
+        StaticData sd = StaticData.getStaticDataObject();
+        int position = sd.getPosition();
+        String user_id = sd.getUser_id();
+        JSONObject data = sd.getBook(position);
 
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); // 기존 title 지우기

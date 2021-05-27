@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -122,12 +121,10 @@ public class ReviewActivity extends AppCompatActivity {
         binding = ActivityReviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent reviewIntent = getIntent();
-        int position = reviewIntent.getIntExtra("position", 0);
-        user_id = reviewIntent.getStringExtra("user_id");
-
-        BookList bookList = BookList.getBookListObject();
-        data = bookList.getBook(position);
+        StaticData sd = StaticData.getStaticDataObject();
+        int position = sd.getPosition();
+        user_id = sd.getUser_id();
+        data = sd.getBook(position);
 
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); // 기존 title 지우기
@@ -149,8 +146,6 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(ReviewActivity.this, AddReviewActivity.class);
-                it.putExtra("position", position);
-                it.putExtra("user_id", user_id);
                 startActivity(it);
             }
         });

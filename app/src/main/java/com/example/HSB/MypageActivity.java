@@ -110,9 +110,8 @@ public class MypageActivity extends AppCompatActivity {
 
         mDrawerLayout = binding.drawerLayout;
 
-        Intent mypageIntent = getIntent();
-        String user_id = mypageIntent.getStringExtra("user_id");
-        String name = mypageIntent.getStringExtra("name");
+        String user_id = StaticData.getStaticDataObject().getUser_id();
+        String name = StaticData.getStaticDataObject().getUser_name();
 
 
         adapter = new RentalBookAdapter(rentalbooks);

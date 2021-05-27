@@ -41,8 +41,8 @@ class BookViewHolder extends RecyclerView.ViewHolder {
                 int i = getAdapterPosition();
                 if (i != RecyclerView.NO_POSITION) {
                     Intent it = new Intent(itemBinding.getRoot().getContext(), DetailActivity.class);
-                    it.putExtra("position", i);
-                    it.putExtra("user_id", new GetUserId().getUserId());
+                    StaticData sd = StaticData.getStaticDataObject();
+                    sd.setPosition(i);
                     itemBinding.getRoot().getContext().startActivity(it);
                 }
             }
@@ -116,9 +116,6 @@ public class ListActivity extends AppCompatActivity {
 
         Intent secondIntent = getIntent();
         String book_name = secondIntent.getStringExtra("book_name");
-        String user_id = secondIntent.getStringExtra("user_id");
-        GetUserId gui = new GetUserId();
-        gui.setUserId(user_id);
 
         adapter = new BookAdapter(books);
         binding.recyclerview.setAdapter(adapter);
@@ -144,8 +141,8 @@ public class ListActivity extends AppCompatActivity {
                                 }
 
                                 //books 라는 JSON List 싱글턴 클래스에 넘겨주기
-                                BookList bl = BookList.getBookListObject();
-                                bl.setBooks(books);
+                                StaticData sb = StaticData.getStaticDataObject();
+                                sb.setBooks(books);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -180,15 +177,5 @@ public class ListActivity extends AppCompatActivity {
         }else{
             super.onBackPressed();
         }
-    }
-}
-
-class GetUserId {
-    private static String userId;
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-    public String getUserId(){
-        return userId;
     }
 }

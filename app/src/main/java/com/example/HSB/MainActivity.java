@@ -28,9 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = binding.drawerLayout;
 
-        Intent intent = getIntent();
-        String user_id = intent.getStringExtra("user_id");
-        String name = intent.getStringExtra("name");
+        String user_id = StaticData.getStaticDataObject().getUser_id();
+        String name = StaticData.getStaticDataObject().getUser_name();
         Toast.makeText(this, user_id + name, Toast.LENGTH_SHORT).show();
 
         binding.find.setOnClickListener(new View.OnClickListener() {
@@ -38,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, ListActivity.class);
                 it.putExtra("book_name", binding.editText.getText().toString());
-                it.putExtra("user_id", user_id);
-                it.putExtra("name", name);
                 startActivity(it);
             }
         });
