@@ -25,15 +25,17 @@ public class DetailActivity extends AppCompatActivity {
         JSONObject data = bookList.getBook(position);
 
         try {
-            binding.name.setText(data.getString("title"));
-            binding.name.setText(data.getString("book_location"));
-            ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + data.getString("title"), binding.imageView);
+            binding.title.setText(data.getString("title"));
+            binding.aboutAuthor.setText(data.getString("author"));
+            //binding.bookIntroduction.setText(data.getString("introduction"));
+            binding.rentalStatus.setText(data.getString("rental"));
+            ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + data.getString("title"), binding.bookImage);
             task.execute();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        /*binding.reviewBtn.setOnClickListener(new View.OnClickListener() {
+        binding.addreviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(DetailActivity.this, ReviewActivity.class);
@@ -41,6 +43,6 @@ public class DetailActivity extends AppCompatActivity {
                 it.putExtra("user_id", user_id);
                 startActivity(it);
             }
-        });*/
+        });
     }
 }

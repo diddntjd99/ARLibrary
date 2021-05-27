@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -106,6 +109,9 @@ public class ReviewActivity extends AppCompatActivity {
     ReviewAdapter adapter;
 
     private Socket socket;
+    JSONObject data;
+
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +124,15 @@ public class ReviewActivity extends AppCompatActivity {
         String user_id = reviewIntent.getStringExtra("user_id");
 
         BookList bookList = BookList.getBookListObject();
-        JSONObject data = bookList.getBook(position);
+        data = bookList.getBook(position);
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false); // 기존 title 지우기
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menubutton_foreground);
+
+        mDrawerLayout = binding.drawerLayout;
+
 
         try {
             socket = IO.socket("http://119.192.49.237/");
@@ -133,30 +147,16 @@ public class ReviewActivity extends AppCompatActivity {
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setHasFixedSize(true);
 
-        JSONObject object = new JSONObject();
-        /*binding.addReviewBtn.setOnClickListener(new View.OnClickListener() {
+        binding.reviewViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    object.put("user_id", user_id);
-                    object.put("title", data.getString("title"));
-                    object.put("review", binding.reviewFieldText.getText());
-                    object.put("rating", binding.ratingBar.getRating());
-                    socket.emit("book_review_add", object);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                binding.reviewFieldText.setText("");
-                binding.ratingBar.setRating(0);
+                Intent it = new Intent(ReviewActivity.this, AddReviewActivity.class);
+                it.putExtra("position", position);
+                it.putExtra("user_id", user_id);
+                startActivity(it);
             }
-        });*/
+        });
 
-        try {
-            socket.emit("book_review", data.getString("title"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         socket.on("return", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -181,29 +181,6 @@ public class ReviewActivity extends AppCompatActivity {
                 });
             }
         });
-        socket.on("reviewSave", new Emitter.Listener() {
-            @Override
-            public void call(final Object... args) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            String str = (String) args[0];
-                            if (str.equals("NoRent")) {
-                                Toast.makeText(ReviewActivity.this, "책을 대여한 기록이 없습니다.", Toast.LENGTH_SHORT).show();
-                            } else if (str.equals("Exist")) {
-                                Toast.makeText(ReviewActivity.this, "이미 리뷰를 등록했습니다.", Toast.LENGTH_SHORT).show();
-                            } else if (str.equals("Save")) {
-                                reviews.add(object);
-                                adapter.notifyItemInserted(adapter.getItemCount());
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        });
         socket.on("delete", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -219,9 +196,40 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            socket.emit("book_review", data.getString("title"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         socket.disconnect();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            mDrawerLayout.closeDrawers();
+        }else{
+            super.onBackPressed();
+        }
     }
 }
 

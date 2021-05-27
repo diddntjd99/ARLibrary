@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,6 +49,7 @@ class RentalBookViewHolder extends RecyclerView.ViewHolder {
 class RentalBookAdapter extends RecyclerView.Adapter<RentalBookViewHolder> {
     private List<JSONObject> rentalbooks;
 
+
     RentalBookAdapter(List<JSONObject> rentalbooks) {
         this.rentalbooks = rentalbooks;
     }
@@ -81,6 +85,8 @@ public class MypageActivity extends AppCompatActivity {
     ArrayList<JSONObject> rentalbooks = new ArrayList<>();
     RentalBookAdapter adapter;
 
+    private DrawerLayout mDrawerLayout;
+
     private Socket socket;
 
     @Override
@@ -97,11 +103,17 @@ public class MypageActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false); // 기존 title 지우기
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menubutton_foreground);
+
+        mDrawerLayout = binding.drawerLayout;
+
         Intent mypageIntent = getIntent();
         String user_id = mypageIntent.getStringExtra("user_id");
         String name = mypageIntent.getStringExtra("name");
 
-        binding.name.setText(name+"님의 대출 도서 목록");
 
         adapter = new RentalBookAdapter(rentalbooks);
         binding.recyclerview.setAdapter(adapter);
@@ -139,5 +151,25 @@ public class MypageActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         socket.disconnect();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            mDrawerLayout.closeDrawers();
+        }else{
+            super.onBackPressed();
+        }
     }
 }
