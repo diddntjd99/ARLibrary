@@ -6,7 +6,7 @@
         android:id="@+id/mainhome"
         android:title="홈"
         app:showAsAction="always"
-        android:icon="@drawable/homebutton_foreground"
+        android:icon="@drawable/ic_home"
         />
 
 </menu>

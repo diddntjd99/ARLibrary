@@ -130,7 +130,7 @@ public class ReviewActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); // 기존 title 지우기
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menubutton_foreground);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_name);
 
         mDrawerLayout = binding.drawerLayout;
 

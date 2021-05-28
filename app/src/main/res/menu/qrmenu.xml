@@ -7,6 +7,6 @@
         android:id="@+id/qrcode"
         android:title="큐알코드"
         app:showAsAction="always"
-        android:icon="@drawable/qrcodebutton_foreground"/>
+        android:icon="@drawable/ic_qrcode"/>
 
 </menu>
