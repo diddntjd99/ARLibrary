@@ -4,12 +4,12 @@
         <item
             android:id="@+id/mypage"
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:title="마이페이지"
+            android:title="대출/연장/예약 현황"
             />
         <item
             android:id="@+id/service"
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:title="서비스 이용/신청"
+            android:title="그룹스터디실"
             />
         <item
             android:id="@+id/introduction"
