@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <item
-        android:id="@+id/mymenu"
-        android:title="메뉴"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/mainhome"
+        android:title="홈"
+        app:showAsAction="always"
+        android:icon="@drawable/homebutton_foreground"
+        />
 
 </menu>

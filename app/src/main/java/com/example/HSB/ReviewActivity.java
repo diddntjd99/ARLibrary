@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -148,6 +151,14 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
+        try {
+            binding.title.setText(data.getString("title"));
+            ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + data.getString("title"), binding.bookImage);
+            task.execute();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         socket.on("return", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -187,6 +198,13 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.homemenu, menu);
+        return true;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -212,10 +230,12 @@ public class ReviewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case android.R.id.home:{
+            case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            }
+            case R.id.mainhome:
+                Toast.makeText(this, "homebutton", Toast.LENGTH_SHORT).show();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
