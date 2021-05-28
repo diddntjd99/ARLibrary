@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:background="#4062B3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -35,16 +34,73 @@
                 tools:layout_editor_absoluteX="61dp" />
         </androidx.appcompat.widget.Toolbar>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="680dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="62dp"
+                android:background="#4062B3"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp">
+
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="339dp"
+                    android:layout_height="57dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="0"
+                    android:background="@color/white"
+                    android:backgroundTint="#FFFFFF"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:longClickable="false"
+                    android:text=""
+                    android:textAlignment="center" />
+
+                <ImageButton
+                    android:id="@+id/find"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="70"
+                    android:backgroundTint="#00FFFFFF"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/loupe2" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textview6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="총 몇건이 검색되었습니다."
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textview7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="도서검색정보"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="615dp" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
