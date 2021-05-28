@@ -235,6 +235,7 @@ public class ReviewActivity extends AppCompatActivity {
                 return true;
             case R.id.mainhome:
                 Toast.makeText(this, "homebutton", Toast.LENGTH_SHORT).show();
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
