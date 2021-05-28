@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_gravity="center"
-                    android:background="@color/white"
+                    android:background="@color/black"
                     android:paddingVertical="0dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp" />
@@ -100,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_gravity="center"
-                    android:background="@color/white"
+                    android:background="@color/black"
                     android:paddingVertical="0dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp" />
@@ -128,6 +128,16 @@
 
                 </LinearLayout>
 
+                <View
+                    android:id="@+id/bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:background="@color/black"
+                    android:paddingVertical="0dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp" />
+
                 <TextView
                     android:id="@+id/textview9"
                     android:layout_width="wrap_content"
@@ -135,16 +145,6 @@
                     android:text="소장사항"
                     android:textColor="#323232"
                     android:textSize="18dp" />
-
-                <View
-                    android:id="@+id/bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:paddingVertical="0dp"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="0dp" />
 
                 <LinearLayout
                     android:id="@+id/Collection"
@@ -155,15 +155,21 @@
 
                     <TextView
                         android:id="@+id/rentalStatus"
-                        android:layout_width="240dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="대출현황"
                         android:textColor="#323232" />
 
+                    <View
+                        android:id="@+id/barr"
+                        android:layout_width="2dp"
+                        android:background="@color/black"
+                        android:layout_height="match_parent" />
+
                     <TextView
                         android:id="@+id/reservationStatus"
-                        android:layout_width="95dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="예약현황"
@@ -173,10 +179,10 @@
 
                 <View
                     android:id="@+id/bar2"
-                    android:layout_width="400dp"
+                    android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_gravity="center"
-                    android:background="@color/white"
+                    android:background="@color/black"
                     android:paddingVertical="0dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp" />
@@ -208,7 +214,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_gravity="center"
-                    android:background="@color/white"
+                    android:background="@color/black"
                     android:paddingVertical="0dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp" />
@@ -240,7 +246,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_gravity="center"
-                    android:background="@color/white"
+                    android:background="@color/black"
                     android:paddingVertical="0dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp" />
@@ -271,7 +277,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_gravity="center"
-                    android:background="@color/white"
+                    android:background="@color/black"
                     android:paddingVertical="0dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp" />
@@ -314,10 +320,10 @@
 
                 <View
                     android:id="@+id/bar3"
-                    android:layout_width="400dp"
+                    android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_gravity="center"
-                    android:background="@color/white"
+                    android:background="@color/black"
                     android:paddingVertical="0dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp" />
@@ -342,7 +348,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:layout_gravity="center"
-                    android:background="@color/white"
+                    android:background="@color/black"
                     android:paddingVertical="0dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp" />
