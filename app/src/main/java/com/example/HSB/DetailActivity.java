@@ -2,6 +2,7 @@ package com.example.HSB;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,6 +52,21 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(DetailActivity.this, ReviewActivity.class);
                 startActivity(it);
+            }
+        });
+
+        binding.unityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent it = new Intent(MainActivity.this, UnityPlayerActivity.class);
+                startActivity(it);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        UnityPlayer.UnitySendMessage("Cube", "test", "Test~~~~~");
+                    }
+                }, 9000);*/
             }
         });
     }
