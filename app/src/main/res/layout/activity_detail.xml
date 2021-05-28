@@ -368,7 +368,7 @@
                         android:layout_weight="1"/>
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/unityBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#FFFFFF"
@@ -410,6 +410,5 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/navi_menu"
-        android:background="#4062B3"/>
+        app:menu="@menu/navi_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>
