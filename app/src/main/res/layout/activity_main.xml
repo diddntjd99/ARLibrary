@@ -60,8 +60,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:longClickable="false"
-                android:text="" />
-                <!--android:gravity="center_horizontal"-->
+                android:text=""
+                android:textAlignment="center"/>
 
 
             <ImageButton
