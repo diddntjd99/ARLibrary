@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(context, "서비스 페이지", Toast.LENGTH_SHORT).show();
                 }
                 else if(id == R.id.introduction){
-                    Toast.makeText(context, "도서관 소개 페이지", Toast.LENGTH_SHORT).show();
+                    Intent it = new Intent(MainActivity.this, LibraryIntroductionActivity.class);
+                    startActivity(it);
                 }
 
                 return true;

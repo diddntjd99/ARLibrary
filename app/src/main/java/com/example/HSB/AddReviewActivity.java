@@ -44,6 +44,8 @@ public class AddReviewActivity extends AppCompatActivity {
 
         try {
             binding.title.setText(data.getString("title"));
+            ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + data.getString("title"), binding.bookImage);
+            task.execute();
         } catch (JSONException e) {
             e.printStackTrace();
         }
