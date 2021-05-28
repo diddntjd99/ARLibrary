@@ -70,7 +70,65 @@
                         android:layout_height="wrap_content"
                         android:text="대출한 도서" />
                 </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/booknum"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="등록번호"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/book_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="책명"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/reservation_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="대여일"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/return_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="반납일"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/extension_date"
+                    android:layout_width="47dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="연장하기"
+                    android:textAlignment="center" />
+            </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
@@ -93,6 +151,59 @@
                     android:layout_height="wrap_content"
                     android:text="예약한 도서" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/booknum2"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="등록번호"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/book_title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="책명"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/reservation_date2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="예약일"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/cancel_date2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="취소"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview2"
                     android:layout_width="match_parent"
@@ -114,7 +225,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/navi_menu"
-        android:background="#4062B3"/>
+        app:menu="@menu/navi_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

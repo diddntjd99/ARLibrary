@@ -6,36 +6,47 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/book_title"
+        android:id="@+id/booknum2"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="등록번호"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/book_title2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="책명"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:text="TextView"
-        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/rental_date"
+        android:id="@+id/reservation_date2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="예약일"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:text="TextView"
-        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/return_date"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/cancel_date2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="TextView"
         android:layout_weight="1"
+        android:text="취소"
+        android:textAlignment="center"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
