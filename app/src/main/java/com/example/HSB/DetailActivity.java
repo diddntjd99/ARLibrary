@@ -1,9 +1,7 @@
 package com.example.HSB;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -111,6 +109,29 @@ public class DetailActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 socket.emit("reservation_add", object);
+            }
+        });
+
+        try {
+            socket.emit("reservation_count", data.getString("title"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        socket.on("reservation_count_return", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String str = (String) args[0];
+                            binding.reservationStatus.setText("예약자 : " + str + "명");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 
