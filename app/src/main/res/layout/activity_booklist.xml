@@ -83,22 +83,45 @@
                 android:id="@+id/textview6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
                 android:text="총 몇건이 검색되었습니다."
                 android:textSize="14sp"
                 android:textStyle="normal" />
+            <View
+                android:id="@+id/bar1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:background="#4062B3"
+                android:paddingVertical="0dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp" />
 
             <TextView
                 android:id="@+id/textview7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#6FE6EDF1"
+                android:paddingHorizontal="10dp"
                 android:text="도서검색정보"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+            <View
+                android:id="@+id/bara2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:background="#4062B3"
+                android:paddingVertical="0dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="615dp" />
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp" />
 
         </LinearLayout>
 
