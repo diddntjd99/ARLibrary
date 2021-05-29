@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
 
                 int id = menuItem.getItemId();
+                binding.editText.setText("");
 
                 if(id == R.id.mypage){
                     Intent it = new Intent(MainActivity.this, MypageActivity.class);
