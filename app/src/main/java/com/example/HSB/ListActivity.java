@@ -124,8 +124,8 @@ public class ListActivity extends AppCompatActivity {
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setHasFixedSize(true);
 
-        socket.emit("book_name", book_name);
-        socket.on("return", new Emitter.Listener() {
+        socket.emit("book_find", book_name);
+        socket.on("book_find_return", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
                 runOnUiThread(new Runnable() {

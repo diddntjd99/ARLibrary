@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/booknum2"
+        android:id="@+id/booknum"
         android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -14,7 +14,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/book_title2"
+        android:id="@+id/book_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/reservation_date2"
+        android:id="@+id/reservation_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/cancel_date2"
+        android:id="@+id/cancel_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

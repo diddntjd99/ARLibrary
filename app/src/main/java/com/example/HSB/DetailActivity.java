@@ -1,5 +1,6 @@
 package com.example.HSB;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,13 +19,29 @@ import com.example.HSB.databinding.ActivityDetailBinding;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+
 public class DetailActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+    private Context context = this;
+    private Socket socket;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityDetailBinding binding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        try {
+            socket = IO.socket("http://119.192.49.237/");
+            //http://14.53.49.163
+            socket.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); // 기존 title 지우기
@@ -69,6 +86,36 @@ public class DetailActivity extends AppCompatActivity {
                 }, 9000);*/
             }
         });
+
+        binding.reservationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSONObject object = new JSONObject();
+
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                String getTime = sdf.format(date);
+
+                try {
+                    object.put("user_id", user_id);
+                    object.put("title", data.getString("title"));
+                    object.put("registration_Number", data.getString("registration_Number"));
+                    object.put("reservation_date", getTime);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                socket.emit("reservation_add", object);
+
+                Toast.makeText(context, "예약되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        socket.disconnect();
     }
 
     @Override

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.HSB.databinding.ActivityMypageBinding;
 import com.example.HSB.databinding.RentalbooklistitemBinding;
+import com.example.HSB.databinding.ReservationbooklistitemBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,10 +33,10 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-class RentalBookViewHolder extends RecyclerView.ViewHolder {
+class RentalHistoryViewHolder extends RecyclerView.ViewHolder {
    RentalbooklistitemBinding itemBinding;
 
-    public RentalBookViewHolder(RentalbooklistitemBinding binding) {
+    public RentalHistoryViewHolder(RentalbooklistitemBinding binding) {
         super(binding.getRoot());
         this.itemBinding = binding;
         itemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
@@ -49,25 +50,25 @@ class RentalBookViewHolder extends RecyclerView.ViewHolder {
     }
 }
 
-class RentalBookAdapter extends RecyclerView.Adapter<RentalBookViewHolder> {
+class RentalHistoryAdapter extends RecyclerView.Adapter<RentalHistoryViewHolder> {
     private List<JSONObject> rentalbooks;
 
 
-    RentalBookAdapter(List<JSONObject> rentalbooks) {
+    RentalHistoryAdapter(List<JSONObject> rentalbooks) {
         this.rentalbooks = rentalbooks;
     }
 
     @NonNull
     @Override
-    public RentalBookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RentalHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         RentalbooklistitemBinding itemBinding = RentalbooklistitemBinding.inflate(inflater, parent, false);
-        return new RentalBookViewHolder(itemBinding);
+        return new RentalHistoryViewHolder(itemBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RentalBookViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RentalHistoryViewHolder holder, int position) {
         JSONObject book = rentalbooks.get(position);
         try {
             holder.itemBinding.bookTitle.setText(book.getString("title"));
@@ -84,9 +85,82 @@ class RentalBookAdapter extends RecyclerView.Adapter<RentalBookViewHolder> {
     }
 }
 
+class ReservationViewHolder extends RecyclerView.ViewHolder {
+    ReservationbooklistitemBinding itemBinding;
+
+    public ReservationViewHolder(ReservationbooklistitemBinding binding) {
+        super(binding.getRoot());
+        this.itemBinding = binding;
+        itemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //리사이클러 뷰 클릭 시
+                int i = getAdapterPosition();
+                if (i != RecyclerView.NO_POSITION) {
+                }
+            }
+        });
+    }
+}
+
+class ReservationAdapter extends RecyclerView.Adapter<ReservationViewHolder> {
+    private List<JSONObject> reservations;
+    private Socket socket;
+
+    ReservationAdapter(List<JSONObject> rentalbooks, Socket socket) {
+        this.reservations = rentalbooks;
+        this.socket = socket;
+    }
+
+    @NonNull
+    @Override
+    public ReservationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        ReservationbooklistitemBinding itemBinding = ReservationbooklistitemBinding.inflate(inflater, parent, false);
+        return new ReservationViewHolder(itemBinding);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ReservationViewHolder holder, int position) {
+        JSONObject book = reservations.get(position);
+        try {
+            holder.itemBinding.bookTitle.setText(book.getString("title"));
+            holder.itemBinding.reservationDate.setText(book.getString("reservation_date"));
+            holder.itemBinding.booknum.setText(book.getString("registration_Number"));
+            holder.itemBinding.cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RemoveReservationIndex ri = new RemoveReservationIndex();
+                    ri.setIndex(position);
+
+                    JSONObject object = new JSONObject();
+                    try {
+                        object.put("user_id", book.getString("user_id"));
+                        object.put("title", book.getString("title"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    socket.emit("delete_reservation", object);
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return reservations.size();
+    }
+}
+
 public class MypageActivity extends AppCompatActivity {
     ArrayList<JSONObject> rentalbooks = new ArrayList<>();
-    RentalBookAdapter adapter;
+    ArrayList<JSONObject> reservations = new ArrayList<>();
+
+    RentalHistoryAdapter rental_adapter;
+    ReservationAdapter reservation_adapter;
 
     private DrawerLayout mDrawerLayout;
 
@@ -117,13 +191,18 @@ public class MypageActivity extends AppCompatActivity {
         String name = StaticData.getStaticDataObject().getUser_name();
 
 
-        adapter = new RentalBookAdapter(rentalbooks);
-        binding.recyclerview.setAdapter(adapter);
-        binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerview.setHasFixedSize(true);
+        rental_adapter = new RentalHistoryAdapter(rentalbooks);
+        binding.recyclerviewRentalHistory.setAdapter(rental_adapter);
+        binding.recyclerviewRentalHistory.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerviewRentalHistory.setHasFixedSize(true);
+
+        reservation_adapter = new ReservationAdapter(reservations, socket);
+        binding.recyclerviewReservation.setAdapter(reservation_adapter);
+        binding.recyclerviewReservation.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerviewReservation.setHasFixedSize(true);
 
         socket.emit("user_rental_history", user_id);
-        socket.on("return", new Emitter.Listener() {
+        socket.on("user_rental_history_return", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
                 runOnUiThread(new Runnable() {
@@ -137,12 +216,50 @@ public class MypageActivity extends AppCompatActivity {
                                 for (int i = 0; i < data.length(); i++) {
                                     //List에 삽입
                                     rentalbooks.add(data.getJSONObject(i));
-                                    adapter.notifyItemInserted(i);
+                                    rental_adapter.notifyItemInserted(i);
                                 }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    }
+                });
+            }
+        });
+
+        socket.emit("reservation", user_id);
+        socket.on("reservation_return", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONArray data = (JSONArray) args[0];
+                            if(data.length() == 0) {
+                                //검색 내용 없음 알림창 생성
+                            } else {
+                                for (int i = 0; i < data.length(); i++) {
+                                    //List에 삽입
+                                    reservations.add(data.getJSONObject(i));
+                                    reservation_adapter.notifyItemInserted(i);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+        socket.on("delete_reservation_return", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        reservations.remove(new RemoveReviewIndex().getIndex());
+                        reservation_adapter.notifyItemRemoved(new RemoveReviewIndex().getIndex());
                     }
                 });
             }
@@ -183,5 +300,15 @@ public class MypageActivity extends AppCompatActivity {
         }else{
             super.onBackPressed();
         }
+    }
+}
+
+class RemoveReservationIndex{
+    private static int index;
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    public int getIndex() {
+        return index;
     }
 }

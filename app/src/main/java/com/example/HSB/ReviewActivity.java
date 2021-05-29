@@ -80,7 +80,7 @@ class ReviewAdapter extends RecyclerView.Adapter<RevirewViewHolder> {
                     @Override
                     public void onClick(View v) {
                         try {
-                            RemoveIndex ri = new RemoveIndex();
+                            RemoveReviewIndex ri = new RemoveReviewIndex();
                             ri.setIndex(position);
 
                             JSONObject object = new JSONObject();
@@ -159,7 +159,7 @@ public class ReviewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        socket.on("return", new Emitter.Listener() {
+        socket.on("book_review_return", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
                 runOnUiThread(new Runnable() {
@@ -183,14 +183,14 @@ public class ReviewActivity extends AppCompatActivity {
                 });
             }
         });
-        socket.on("delete", new Emitter.Listener() {
+        socket.on("delete_review_return", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        reviews.remove(new RemoveIndex().getIndex());
-                        adapter.notifyItemRemoved(new RemoveIndex().getIndex());
+                        reviews.remove(new RemoveReviewIndex().getIndex());
+                        adapter.notifyItemRemoved(new RemoveReviewIndex().getIndex());
                     }
                 });
             }
@@ -251,7 +251,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
 }
 
-class RemoveIndex{
+class RemoveReviewIndex{
     private static int index;
     public void setIndex(int index) {
         this.index = index;
