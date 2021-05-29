@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
 
                 if(id == R.id.mypage){
-                    Toast.makeText(context, "마이페이지", Toast.LENGTH_SHORT).show();
+                    Intent it = new Intent(MainActivity.this, MypageActivity.class);
+                    startActivity(it);
                 }
                 else if(id == R.id.service){
                     Toast.makeText(context, "서비스 페이지", Toast.LENGTH_SHORT).show();

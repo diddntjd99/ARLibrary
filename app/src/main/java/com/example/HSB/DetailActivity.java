@@ -38,9 +38,9 @@ public class DetailActivity extends AppCompatActivity {
 
         try {
             binding.title.setText(data.getString("title"));
-            binding.aboutAuthor.setText(data.getString("author"));
-            //binding.bookIntroduction.setText(data.getString("introduction"));
-            binding.rentalStatus.setText(data.getString("rental"));
+            binding.author.setText(data.getString("author"));
+            binding.bookIntroduction.setText(data.getString("introduction"));
+            //binding.rentalStatus.setText(data.getString("rental"));
             ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + data.getString("title"), binding.bookImage);
             task.execute();
         } catch (JSONException e) {
