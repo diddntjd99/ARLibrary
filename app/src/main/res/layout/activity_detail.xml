@@ -341,7 +341,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/registration_Number"
+                                    android:id="@+id/textview"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -351,7 +351,7 @@
                                     android:textSize="14sp" />
 
                                 <TextView
-                                    android:id="@+id/textView18"
+                                    android:id="@+id/registration_Number"
                                     android:layout_width="210dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"

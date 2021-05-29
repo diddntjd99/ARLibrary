@@ -40,8 +40,11 @@ public class MainActivity extends AppCompatActivity {
         binding.find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent it = new Intent(MainActivity.this, ListActivity.class);
+
                 it.putExtra("book_name", binding.editText.getText().toString());
+                binding.editText.setText("");
                 startActivity(it);
             }
         });

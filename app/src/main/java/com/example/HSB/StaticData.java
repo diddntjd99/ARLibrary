@@ -44,4 +44,5 @@ public class StaticData {
     public void setBook(JSONObject book) {
         this.book = book;
     }
+
 }

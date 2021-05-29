@@ -258,8 +258,8 @@ public class MypageActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        reservations.remove(new RemoveReviewIndex().getIndex());
-                        reservation_adapter.notifyItemRemoved(new RemoveReviewIndex().getIndex());
+                        reservations.remove(new RemoveReservationIndex().getIndex());
+                        reservation_adapter.notifyItemRemoved(new RemoveReservationIndex().getIndex());
                     }
                 });
             }
@@ -287,7 +287,11 @@ public class MypageActivity extends AppCompatActivity {
                 return true;
 
             case R.id.mainhome:
-                Toast.makeText(this, "homebutton", Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(this, MainActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                it.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(it);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

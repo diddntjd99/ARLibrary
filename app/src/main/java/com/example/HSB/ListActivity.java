@@ -73,7 +73,10 @@ class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
         JSONObject book = books.get(position);
         try {
             holder.itemBinding.textView.setText(book.getString("title"));
-
+            holder.itemBinding.author.setText(book.getString("author"));
+            holder.itemBinding.publisher.setText(book.getString("publisher"));
+            holder.itemBinding.publicationYear.setText(book.getString("publication_year"));
+            holder.itemBinding.callNumber.setText(book.getString("call_Number"));
             ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + book.getString("title"), holder.itemBinding.image);
             task.execute();
         } catch (JSONException e) {
@@ -94,7 +97,7 @@ public class ListActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
     private Socket socket;
-
+    int size =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,8 +143,9 @@ public class ListActivity extends AppCompatActivity {
                                     //List에 삽입
                                     books.add(data.getJSONObject(i));
                                     adapter.notifyItemInserted(i);
+                                    size++;
                                 }
-
+                                binding.textview6.setText("총 "+ size+"건이 검색되었습니다.");
                                 //books 라는 JSON List 싱글턴 클래스에 넘겨주기
                                 StaticData.getStaticDataObject().setBooks(books);
                             }
@@ -176,7 +180,11 @@ public class ListActivity extends AppCompatActivity {
                 return true;
 
             case R.id.mainhome:
-                Toast.makeText(this, "homebutton", Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(this, MainActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                it.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(it);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

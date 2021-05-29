@@ -1,5 +1,6 @@
 package com.example.HSB;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -68,7 +69,11 @@ public class LibraryIntroductionActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.mainhome:
-                Toast.makeText(this, "homebutton", Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(this, MainActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                it.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(it);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

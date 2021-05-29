@@ -24,10 +24,10 @@ import java.util.Date;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 public class DetailActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
-    private Context context = this;
     private Socket socket;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,12 @@ public class DetailActivity extends AppCompatActivity {
             binding.title.setText(data.getString("title"));
             binding.author.setText(data.getString("author"));
             binding.bookIntroduction.setText(data.getString("introduction"));
-            //binding.rentalStatus.setText(data.getString("rental"));
+            binding.publicationYear.setText(data.getString("publication_year"));
+            binding.publisher.setText(data.getString("publisher"));
+            binding.ISBN.setText(data.getString("ISBN"));
+            binding.bookLocation.setText(data.getString("book_location")+"층");
+            binding.registrationNumber.setText(data.getString("registration_Number"));
+            binding.callNumber.setText(data.getString("call_Number"));
             ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + data.getString("title"), binding.bookImage);
             task.execute();
         } catch (JSONException e) {
@@ -107,7 +112,27 @@ public class DetailActivity extends AppCompatActivity {
                 }
                 socket.emit("reservation_add", object);
 
-                Toast.makeText(context, "예약되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        socket.on("reservationSave", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String str = (String) args[0];
+                            if (str.equals("Exist")) {
+                                Toast.makeText(DetailActivity.this, "이미 예약이 되어있습니다.", Toast.LENGTH_SHORT).show();
+                            } else if (str.equals("Save")) {
+                                Toast.makeText(DetailActivity.this, "예약되었습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
     }
@@ -133,7 +158,11 @@ public class DetailActivity extends AppCompatActivity {
                 return true;
 
             case R.id.mainhome:
-                Toast.makeText(this, "homebutton", Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(this, MainActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                it.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(it);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
