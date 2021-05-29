@@ -111,7 +111,6 @@ public class DetailActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 socket.emit("reservation_add", object);
-
             }
         });
 

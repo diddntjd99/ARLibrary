@@ -97,7 +97,6 @@ public class ListActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
     private Socket socket;
-    int size =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,12 +119,25 @@ public class ListActivity extends AppCompatActivity {
         mDrawerLayout = binding.drawerLayout;
 
         Intent secondIntent = getIntent();
-        String book_name = secondIntent.getStringExtra("book_name");
+        String book_name = secondIntent.getStringExtra("book_title");
 
         adapter = new BookAdapter(books);
         binding.recyclerview.setAdapter(adapter);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setHasFixedSize(true);
+
+        binding.find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                books = new ArrayList<>();
+                adapter = new BookAdapter(books);
+                binding.recyclerview.setAdapter(adapter);
+                binding.recyclerview.setLayoutManager(new LinearLayoutManager(ListActivity.this));
+                binding.recyclerview.setHasFixedSize(true);
+
+                socket.emit("book_find", binding.editText.getText());
+            }
+        });
 
         socket.emit("book_find", book_name);
         socket.on("book_find_return", new Emitter.Listener() {
@@ -143,9 +155,8 @@ public class ListActivity extends AppCompatActivity {
                                     //List에 삽입
                                     books.add(data.getJSONObject(i));
                                     adapter.notifyItemInserted(i);
-                                    size++;
                                 }
-                                binding.textview6.setText("총 "+ size+"건이 검색되었습니다.");
+                                binding.bookCount.setText("총 "+ adapter.getItemCount() +"건이 검색되었습니다.");
                                 //books 라는 JSON List 싱글턴 클래스에 넘겨주기
                                 StaticData.getStaticDataObject().setBooks(books);
                             }

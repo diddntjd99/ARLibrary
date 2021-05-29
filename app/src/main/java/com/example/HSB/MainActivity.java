@@ -18,7 +18,6 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
-    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent it = new Intent(MainActivity.this, ListActivity.class);
 
-                it.putExtra("book_name", binding.editText.getText().toString());
+                it.putExtra("book_title", binding.editText.getText().toString());
                 binding.editText.setText("");
                 startActivity(it);
             }
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(it);
                 }
                 else if(id == R.id.service){
-                    Toast.makeText(context, "서비스 페이지", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "서비스 페이지", Toast.LENGTH_SHORT).show();
                 }
                 else if(id == R.id.introduction){
                     Intent it = new Intent(MainActivity.this, LibraryIntroductionActivity.class);
