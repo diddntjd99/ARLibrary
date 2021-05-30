@@ -1,15 +1,19 @@
 package com.example.HSB;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.HSB.databinding.ActivityMainBinding;
@@ -34,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         String user_id = StaticData.getStaticDataObject().getUser_id();
         String name = StaticData.getStaticDataObject().getUser_name();
         Toast.makeText(this, user_id + name, Toast.LENGTH_SHORT).show();
+
+        TextView userId = (TextView) (binding.navView.getHeaderView(0).findViewById(R.id.user_id));
+        TextView userName = (TextView) (binding.navView.getHeaderView(0).findViewById(R.id.user_name));
+
+        userId.setText(user_id);
+        userName.setText(name);
 
         binding.find.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +99,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.qrcode:
-                Toast.makeText(this, "qrcode", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                LayoutInflater factory = LayoutInflater.from(MainActivity.this);
+                final View view = factory.inflate(R.layout.qr_code, null);
+                alert.setView(view);
+                alert.setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dlg, int sumthin) {
+                    }
+                });
+                alert.show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
