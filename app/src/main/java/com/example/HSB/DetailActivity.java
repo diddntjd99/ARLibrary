@@ -59,6 +59,11 @@ public class DetailActivity extends AppCompatActivity {
             binding.publisher.setText(data.getString("publisher"));
             binding.ISBN.setText(data.getString("ISBN"));
             binding.bookLocation.setText(data.getString("book_location")+"층");
+            if (data.getBoolean("rental")) {
+                binding.rentalStatus.setText("대여 가능");
+            } else {
+                binding.rentalStatus.setText("대여 불가능");
+            }
             binding.registrationNumber.setText(data.getString("registration_Number"));
             binding.callNumber.setText(data.getString("call_Number"));
             ImageLoadTask task = new ImageLoadTask("http://119.192.49.237/img/" + data.getString("title"), binding.bookImage);
