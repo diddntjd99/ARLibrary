@@ -152,6 +152,11 @@ public class DetailActivity extends AppCompatActivity {
                                 Toast.makeText(DetailActivity.this, "이미 예약이 되어있습니다.", Toast.LENGTH_SHORT).show();
                             } else if (str.equals("Save")) {
                                 Toast.makeText(DetailActivity.this, "예약되었습니다.", Toast.LENGTH_SHORT).show();
+                                try {
+                                    socket.emit("reservation_count", data.getString("title"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

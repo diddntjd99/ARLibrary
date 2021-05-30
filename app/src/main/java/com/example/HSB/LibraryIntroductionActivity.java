@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -50,6 +53,7 @@ public class LibraryIntroductionActivity extends AppCompatActivity {
         });
 
         binding.webView.loadUrl(url);
+        binding.webView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = binding.webView.getSettings();
 
         webSettings.setJavaScriptEnabled(true); //자바스크립트 허용

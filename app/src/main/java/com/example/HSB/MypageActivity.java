@@ -9,8 +9,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.RadioGroup;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -34,7 +35,7 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
 class RentalHistoryViewHolder extends RecyclerView.ViewHolder {
-   RentalbooklistitemBinding itemBinding;
+    RentalbooklistitemBinding itemBinding;
 
     public RentalHistoryViewHolder(RentalbooklistitemBinding binding) {
         super(binding.getRoot());
@@ -74,6 +75,7 @@ class RentalHistoryAdapter extends RecyclerView.Adapter<RentalHistoryViewHolder>
             holder.itemBinding.bookTitle.setText(book.getString("title"));
             holder.itemBinding.rentalDate.setText(book.getString("rental_date"));
             holder.itemBinding.returnDate.setText(book.getString("return_date"));
+            holder.itemBinding.booknum.setText(book.getString("registration_Number"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -190,7 +192,6 @@ public class MypageActivity extends AppCompatActivity {
         String user_id = StaticData.getStaticDataObject().getUser_id();
         String name = StaticData.getStaticDataObject().getUser_name();
 
-
         rental_adapter = new RentalHistoryAdapter(rentalbooks);
         binding.recyclerviewRentalHistory.setAdapter(rental_adapter);
         binding.recyclerviewRentalHistory.setLayoutManager(new LinearLayoutManager(this));
@@ -200,6 +201,23 @@ public class MypageActivity extends AppCompatActivity {
         binding.recyclerviewReservation.setAdapter(reservation_adapter);
         binding.recyclerviewReservation.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerviewReservation.setHasFixedSize(true);
+
+        binding.radioGroup.setOnCheckedChangeListener (new RadioGroup.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if (i == R.id.rental_list) {
+                    binding.linear1.setVisibility(View.VISIBLE);
+                    binding.recyclerviewRentalHistory.setVisibility(View.VISIBLE);
+                    binding.linear2.setVisibility(View.GONE);
+                    binding.recyclerviewReservation.setVisibility(View.GONE);
+                } else if (i == R.id.reservation_list) {
+                    binding.linear1.setVisibility(View.GONE);
+                    binding.recyclerviewRentalHistory.setVisibility(View.GONE);
+                    binding.linear2.setVisibility(View.VISIBLE);
+                    binding.recyclerviewReservation.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         socket.emit("user_rental_history", user_id);
         socket.on("user_rental_history_return", new Emitter.Listener() {
@@ -245,6 +263,7 @@ public class MypageActivity extends AppCompatActivity {
                                     reservation_adapter.notifyItemInserted(i);
                                 }
                             }
+                            binding.rentalList.setChecked(true);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

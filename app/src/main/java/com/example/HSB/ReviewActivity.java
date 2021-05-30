@@ -134,7 +134,6 @@ public class ReviewActivity extends AppCompatActivity {
 
         mDrawerLayout = binding.drawerLayout;
 
-
         try {
             socket = IO.socket("http://119.192.49.237/");
             //http://14.53.49.163
