@@ -3,6 +3,7 @@ package com.example.HSB;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +28,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import io.socket.client.IO;
@@ -53,10 +58,11 @@ class RentalHistoryViewHolder extends RecyclerView.ViewHolder {
 
 class RentalHistoryAdapter extends RecyclerView.Adapter<RentalHistoryViewHolder> {
     private List<JSONObject> rentalbooks;
+    private Socket socket;
 
-
-    RentalHistoryAdapter(List<JSONObject> rentalbooks) {
+    RentalHistoryAdapter(List<JSONObject> rentalbooks, Socket socket) {
         this.rentalbooks = rentalbooks;
+        this.socket = socket;
     }
 
     @NonNull
@@ -65,6 +71,7 @@ class RentalHistoryAdapter extends RecyclerView.Adapter<RentalHistoryViewHolder>
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         RentalbooklistitemBinding itemBinding = RentalbooklistitemBinding.inflate(inflater, parent, false);
+
         return new RentalHistoryViewHolder(itemBinding);
     }
 
@@ -76,6 +83,45 @@ class RentalHistoryAdapter extends RecyclerView.Adapter<RentalHistoryViewHolder>
             holder.itemBinding.rentalDate.setText(book.getString("rental_date"));
             holder.itemBinding.returnDate.setText(book.getString("return_date"));
             holder.itemBinding.booknum.setText(book.getString("registration_Number"));
+
+            String str = book.getString("return_date");
+
+            long now = System.currentTimeMillis();
+            Date date = new Date(now);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String getTime = sdf.format(date);
+
+            if(str.compareTo(getTime) == 1 || str.compareTo(getTime)==0)  //반납일이 현재를 지나지 않았을 때
+            {
+                holder.itemBinding.button.setVisibility(View.VISIBLE);
+            }else{
+                holder.itemBinding.button.setVisibility(View.INVISIBLE);
+            }
+
+            holder.itemBinding.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
+                        Date to =transFormat.parse(str);   //날짜 문자열 date형으로
+                        Calendar cal = Calendar.getInstance();
+                        //반납날짜에서 2주 지나게 계산
+                        cal.setTime(to);
+                        cal.add(Calendar.DAY_OF_WEEK, 14);
+                        String return_date = transFormat.format(cal.getTime());
+
+                        JSONObject object = new JSONObject();  //json객체 만들어서 바뀐 반납날짜 저장하고 서버로 보내기
+                        object.put("user_id", book.getString("user_id"));
+                        object.put("title", book.getString("title"));
+                        object.put("return_date", return_date);
+                        Log.i("TAG", return_date);
+                        holder.itemBinding.returnDate.setText(return_date); //바뀐날짜 업데이트트
+                        socket.emit("update_return_date", object);
+                    } catch (JSONException | ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -192,7 +238,7 @@ public class MypageActivity extends AppCompatActivity {
         String user_id = StaticData.getStaticDataObject().getUser_id();
         String name = StaticData.getStaticDataObject().getUser_name();
 
-        rental_adapter = new RentalHistoryAdapter(rentalbooks);
+        rental_adapter = new RentalHistoryAdapter(rentalbooks, socket);
         binding.recyclerviewRentalHistory.setAdapter(rental_adapter);
         binding.recyclerviewRentalHistory.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerviewRentalHistory.setHasFixedSize(true);
