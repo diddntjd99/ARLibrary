@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(it);
                 }
                 else if(id == R.id.service){
-                    Toast.makeText(MainActivity.this, "서비스 페이지", Toast.LENGTH_SHORT).show();
+                    Intent it = new Intent(MainActivity.this, GroupStudyActivity.class);
+                    startActivity(it);
                 }
                 else if(id == R.id.introduction){
                     Intent it = new Intent(MainActivity.this, LibraryIntroductionActivity.class);

@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".LibraryIntroductionActivity">
         </activity>
+        <activity android:name=".GroupStudyActivity">
+        </activity>
     </application>
 
 </manifest>
