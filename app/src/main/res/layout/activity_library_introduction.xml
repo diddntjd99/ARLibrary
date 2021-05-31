@@ -31,6 +31,23 @@
                 tools:layout_editor_absoluteX="61dp" />
         </androidx.appcompat.widget.Toolbar>
 
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="#DDDDDD"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="5dp"
+            android:text="도서관 소개"
+            android:textColor="#4062B3"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
@@ -38,7 +55,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toBottomOf="@+id/textView11">
 
             <RadioButton
                 android:id="@+id/open"
@@ -61,10 +78,9 @@
         </RadioGroup>
 
         <WebView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
             android:id="@+id/webView"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="606dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
