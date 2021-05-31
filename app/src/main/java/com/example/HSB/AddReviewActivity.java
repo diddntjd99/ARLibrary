@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.HSB.databinding.ActivityAddreviewBinding;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,6 +79,30 @@ public class AddReviewActivity extends AppCompatActivity {
             }
         });
 
+        binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+
+                int id = menuItem.getItemId();
+
+                if(id == R.id.mypage){
+                    Intent it = new Intent(AddReviewActivity.this, MypageActivity.class);
+                    startActivity(it);
+                }
+                else if(id == R.id.service){
+                    Intent it = new Intent(AddReviewActivity.this, GroupStudyActivity.class);
+                    startActivity(it);
+                }
+                else if(id == R.id.introduction){
+                    Intent it = new Intent(AddReviewActivity.this, LibraryIntroductionActivity.class);
+                    startActivity(it);
+                }
+
+                return true;
+            }
+        });
 
         socket.on("reviewSave", new Emitter.Listener() {
             @Override

@@ -18,6 +18,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.HSB.databinding.ActivityLibraryIntroductionBinding;
+import com.google.android.material.navigation.NavigationView;
 
 public class LibraryIntroductionActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -49,6 +50,33 @@ public class LibraryIntroductionActivity extends AppCompatActivity {
                     url = "https://hsel.hansung.ac.kr/intro_map.mir";
                     binding.webView.loadUrl(url);
                 }
+            }
+        });
+
+        binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+
+                int id = menuItem.getItemId();
+
+                if(id == R.id.mypage){
+                    Intent it = new Intent(LibraryIntroductionActivity.this, MypageActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                else if(id == R.id.service){
+                    Intent it = new Intent(LibraryIntroductionActivity.this, GroupStudyActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                else if(id == R.id.introduction){
+                    Intent it = new Intent(LibraryIntroductionActivity.this, LibraryIntroductionActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                return true;
             }
         });
 

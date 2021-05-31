@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.HSB.databinding.ActivityMypageBinding;
 import com.example.HSB.databinding.RentalbooklistitemBinding;
 import com.example.HSB.databinding.ReservationbooklistitemBinding;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -262,6 +263,33 @@ public class MypageActivity extends AppCompatActivity {
                     binding.linear2.setVisibility(View.VISIBLE);
                     binding.recyclerviewReservation.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+
+                int id = menuItem.getItemId();
+
+                if(id == R.id.mypage){
+                    Intent it = new Intent(MypageActivity.this, MypageActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                else if(id == R.id.service){
+                    Intent it = new Intent(MypageActivity.this, GroupStudyActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                else if(id == R.id.introduction){
+                    Intent it = new Intent(MypageActivity.this, LibraryIntroductionActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+                return true;
             }
         });
 

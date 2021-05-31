@@ -51,22 +51,22 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/textView11"
-            tools:layout_editor_absoluteX="0dp">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
-
 
                 <ImageView
                     android:id="@+id/imageView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:scrollbarAlwaysDrawHorizontalTrack="false"
                     app:srcCompat="@drawable/gss_11" />
 
                 <ImageView
@@ -78,7 +78,7 @@
                     app:srcCompat="@drawable/gss_22" />
 
                 <Button
-                    android:id="@+id/addreviewBtn"
+                    android:id="@+id/addReservationBtn"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -92,6 +92,7 @@
                     android:textStyle="bold"
                     app:cornerRadius="10dp" />
 
+
             </LinearLayout>
         </ScrollView>
 
@@ -103,5 +104,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:headerLayout="@layout/navi_header"
         app:menu="@menu/navi_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

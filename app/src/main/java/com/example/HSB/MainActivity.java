@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.HSB.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         String user_id = StaticData.getStaticDataObject().getUser_id();
         String name = StaticData.getStaticDataObject().getUser_name();
-        Toast.makeText(this, user_id + name, Toast.LENGTH_SHORT).show();
 
         TextView userId = (TextView) (binding.navView.getHeaderView(0).findViewById(R.id.user_id));
         TextView userName = (TextView) (binding.navView.getHeaderView(0).findViewById(R.id.user_name));
@@ -82,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
     @Override
@@ -102,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.qrcode:
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
                 LayoutInflater factory = LayoutInflater.from(MainActivity.this);
-                final View view = factory.inflate(R.layout.qr_code, null);
+                final View view = factory.inflate(R.layout.qr_code_alert, null);
                 alert.setView(view);
                 alert.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dlg, int sumthin) {
