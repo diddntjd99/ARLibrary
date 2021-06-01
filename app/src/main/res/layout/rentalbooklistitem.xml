@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/booknum"
-        android:layout_width="30dp"
+        android:layout_width="13dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="등록번호"
@@ -28,9 +28,9 @@
 
     <TextView
         android:id="@+id/rental_date"
-        android:layout_width="wrap_content"
+        android:layout_width="8dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:text="대여일"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -41,9 +41,9 @@
 
     <TextView
         android:id="@+id/return_date"
-        android:layout_width="wrap_content"
+        android:layout_width="8dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:text="반납일"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -54,7 +54,7 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="47dp"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="연장하기"

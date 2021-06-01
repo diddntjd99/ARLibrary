@@ -57,24 +57,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11">
 
+
+
             <RadioButton
                 android:id="@+id/open"
-                android:layout_width="match_parent"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="개관 안내" />
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/radiobutton_left"
+                android:button="@android:color/transparent"
+                android:paddingVertical="5dp"
+                android:scrollHorizontally="false"
+                android:text="개관 안내"
+                android:textAlignment="center" />
 
             <RadioButton
                 android:id="@+id/floor"
-                android:layout_width="match_parent"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="실별 안내" />
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/radiobutton_center"
+                android:button="@android:color/transparent"
+                android:paddingVertical="5dp"
+                android:scrollHorizontally="false"
+                android:text="실별 안내"
+                android:textAlignment="center" />
 
             <RadioButton
                 android:id="@+id/location"
-                android:layout_width="match_parent"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="위치 안내" />
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/radiobutton_rigth"
+                android:button="@android:color/transparent"
+                android:paddingVertical="5dp"
+                android:scrollHorizontally="false"
+                android:text="위치 안내"
+                android:textAlignment="center" />
         </RadioGroup>
 
         <WebView
