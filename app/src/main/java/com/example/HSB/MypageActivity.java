@@ -92,7 +92,7 @@ class RentalHistoryAdapter extends RecyclerView.Adapter<RentalHistoryViewHolder>
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             String getTime = sdf.format(date);
 
-            if(str.compareTo(getTime) == 1 || str.compareTo(getTime)==0)  //반납일이 현재를 지나지 않았을 때
+            if(str.compareTo(getTime) >= 0)  //반납일이 현재를 지나지 않았을 때
             {
                 holder.itemBinding.button.setVisibility(View.VISIBLE);
             }else{
