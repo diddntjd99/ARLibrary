@@ -257,6 +257,7 @@ public class MypageActivity extends AppCompatActivity {
                     binding.recyclerviewRentalHistory.setVisibility(View.VISIBLE);
                     binding.linear2.setVisibility(View.GONE);
                     binding.recyclerviewReservation.setVisibility(View.GONE);
+                    binding.rentalList.setChecked(true);
                 } else if (i == R.id.reservation_list) {
                     binding.linear1.setVisibility(View.GONE);
                     binding.recyclerviewRentalHistory.setVisibility(View.GONE);
