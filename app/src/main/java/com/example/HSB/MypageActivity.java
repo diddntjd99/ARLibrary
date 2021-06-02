@@ -257,7 +257,6 @@ public class MypageActivity extends AppCompatActivity {
                     binding.recyclerviewRentalHistory.setVisibility(View.VISIBLE);
                     binding.linear2.setVisibility(View.GONE);
                     binding.recyclerviewReservation.setVisibility(View.GONE);
-                    binding.rentalList.setChecked(true);
                 } else if (i == R.id.reservation_list) {
                     binding.linear1.setVisibility(View.GONE);
                     binding.recyclerviewRentalHistory.setVisibility(View.GONE);
@@ -311,6 +310,8 @@ public class MypageActivity extends AppCompatActivity {
                                     rentalbooks.add(data.getJSONObject(i));
                                     rental_adapter.notifyItemInserted(i);
                                 }
+
+                                binding.rentalList.setChecked(true);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -338,7 +339,6 @@ public class MypageActivity extends AppCompatActivity {
                                     reservation_adapter.notifyItemInserted(i);
                                 }
                             }
-                            binding.rentalList.setChecked(true);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
