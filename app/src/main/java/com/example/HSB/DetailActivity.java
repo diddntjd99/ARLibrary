@@ -2,6 +2,7 @@ package com.example.HSB;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.HSB.databinding.ActivityDetailBinding;
 import com.google.android.material.navigation.NavigationView;
+import com.unity3d.player.UnityPlayer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,15 +86,29 @@ public class DetailActivity extends AppCompatActivity {
         binding.unityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent it = new Intent(MainActivity.this, UnityPlayerActivity.class);
+                Intent it = new Intent(DetailActivity.this, UnityPlayerActivity.class);
                 startActivity(it);
+
+                String unityData = "유니티 데이터";
+                //책 이름/골 이름/방향/층/청구기호
+                try {
+                    unityData = data.getString("title") + "/" +
+                            data.getString("goal_point") + "/" +
+                            data.getString("direction") + "/" +
+                            data.getString("book_location") + "/" +
+                            data.getString("call_Number");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 Handler handler = new Handler();
+                String finalUnityData = unityData;
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        UnityPlayer.UnitySendMessage("Cube", "test", "Test~~~~~");
+                        UnityPlayer.UnitySendMessage("BasicSetting", "androidData", finalUnityData);
                     }
-                }, 9000);*/
+                }, 3000);
             }
         });
 

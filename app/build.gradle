@@ -6,6 +6,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.example.testapp"
         minSdkVersion 26
@@ -13,19 +18,55 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+        versionCode 975
+        versionName '9.7.5'
+        consumerProguardFiles 'proguard-unity.txt'
+    }
+
+    aaptOptions {
+        noCompress = ['.unity3d', '.ress', '.resource', '.obb', 'vuforia/artest.dat', 'vuforia/artest.xml', 'vuforia/db-device.dat', 'vuforia/db-device.xml', 'vuforia/vuforiamars_images.dat', 'vuforia/vuforiamars_images.xml', 'vuforia/vuforiamars_modeltarget.dat', 'vuforia/vuforiamars_modeltarget.xml', 'vuforia/vuforiamars_object_ot.dat', 'vuforia/vuforiamars_object_ot.xml', 'vuforia/vuforiamars_vumark.dat', 'vuforia/vuforiamars_vumark.xml', 'vuforia/vuforia_marslander_rzr_toy360.dat', 'vuforia/vuforia_marslander_rzr_toy360.xml']
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            signingConfig signingConfigs.debug
+            jniDebuggable true
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            signingConfig signingConfigs.debug
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+
+    packagingOptions {
+        doNotStrip '*/arm64-v8a/*.so'
     }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = false
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+
     buildFeatures {
         viewBinding true
     }
@@ -43,4 +84,8 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    implementation 'com.google.ar:core:1.18.0'
+    implementation files('libs\\unity-classes.jar')
+    implementation files('libs\\VuforiaWrapper.aar')
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="4F_1078_1" size="10.000000 13.606558" />
+    <ImageTarget name="4F_1082_2" size="10.000000 34.083885" />
+    <ImageTarget name="4F_1082_1" size="10.000000 13.289474" />
+    <ImageTarget name="4F_1081_2" size="10.000000 36.073753" />
+    <ImageTarget name="4F_1081_1" size="10.000000 12.578475" />
+    <ImageTarget name="4F_1080_2" size="10.000000 41.168480" />
+    <ImageTarget name="4F_1080_1" size="10.000000 13.935185" />
+    <ImageTarget name="4F_1079_3" size="10.000000 40.478722" />
+    <ImageTarget name="4F_1078_2" size="10.000000 47.185627" />
+    <ImageTarget name="IMG_0018_1" size="10.000000 19.702127" />
+    <ImageTarget name="IMG_0022_1" size="10.000000 16.454767" />
+    <ImageTarget name="IMG_0013_3" size="10.000000 17.544643" />
+    <ImageTarget name="IMG_0020_1" size="10.000000 17.687500" />
+    <ImageTarget name="IMG_0011_1_1" size="10.000000 56.330936" />
+    <ImageTarget name="IMG_0017_1" size="10.000000 28.438288" />
+    <ImageTarget name="IMG0009_1" size="10.000000 23.043478" />
+    <ImageTarget name="IMG_0023_1" size="10.000000 13.770492" />
+    <ImageTarget name="IMG_0024_1" size="10.000000 16.866667" />
+    <ImageTarget name="IMG_0025_1" size="10.000000 16.803278" />
+    <ImageTarget name="3F_BOOK1_1" size="5.000000 23.671875" />
+    <ImageTarget name="IMG_0025" size="10.000000 44.008621" />
+    <ImageTarget name="IMG_0024" size="10.000000 30.833334" />
+    <ImageTarget name="IMG_0022" size="10.000000 16.842106" />
+    <ImageTarget name="IMG_0012" size="10.000000 57.000000" />
+    <ImageTarget name="IMG_0018" size="10.000000 23.040001" />
+    <ImageTarget name="IMG_0017" size="10.000000 13.937947" />
+    <ImageTarget name="IMG_0016" size="10.000000 13.481308" />
+    <ImageTarget name="IMG_0010" size="10.000000 14.441625" />
+    <ImageTarget name="3F_BOOK2_3" size="10.000000 20.847458" />
+    <ImageTarget name="3F_BOOK5_2" size="10.000000 14.000000" />
+    <ImageTarget name="3F_BOOK4_2" size="10.000000 20.825243" />
+    <ImageTarget name="3F_BOOK3_2" size="10.000000 15.946970" />
+    <ImageTarget name="3F_BOOK2_2" size="10.000000 13.375796" />
+    <ImageTarget name="img-test" size="10.000000 10.000000" />
+  </Tracking>
+</QCARConfig>
