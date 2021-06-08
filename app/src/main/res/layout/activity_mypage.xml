@@ -41,7 +41,7 @@
             android:background="#DDDDDD"
             android:paddingHorizontal="5dp"
             android:paddingVertical="5dp"
-            android:text="그룹스터디실"
+            android:text="마이페이지"
             android:textColor="#4062B3"
             android:textSize="18sp"
             android:textStyle="bold"

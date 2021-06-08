@@ -108,7 +108,7 @@ public class DetailActivity extends AppCompatActivity {
                     public void run() {
                         UnityPlayer.UnitySendMessage("BasicSetting", "androidData", finalUnityData);
                     }
-                }, 3000);
+                }, 4000);
             }
         });
 
