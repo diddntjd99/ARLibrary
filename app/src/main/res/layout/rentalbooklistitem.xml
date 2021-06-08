@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/booknum"
-        android:layout_width="10dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="등록번호"
@@ -39,13 +39,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/bara2"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingVertical="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp" />
+
     <TextView
         android:id="@+id/return_date"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="반납일"
-        android:textAlignment="viewEnd"
+        android:textAlignment="center"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
